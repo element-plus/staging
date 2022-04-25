@@ -1,1 +1,0 @@
-import{c as e,o as t}from"./app.930eecbd.js";const c='{"title":"A Vue 3 UI Framework","description":"","frontmatter":{"title":"A Vue 3 UI Framework","lang":"en-US","page":true},"headers":[],"relativePath":"index.md","lastUpdated":1650889278000}',a={},_=Object.assign(a,{setup(r){return(o,n)=>(t(),e("div"))}});export{c as __pageData,_ as default};
