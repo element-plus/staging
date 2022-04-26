@@ -1,1 +1,0 @@
-import{c as t,a,r as o,o as r}from"./app.cb53cb55.js";const p='{"title":"","description":"","frontmatter":{"page":true,"lang":"en-US"},"headers":[],"relativePath":"en-US/resource/index.md","lastUpdated":1650935636000}',n={},d=Object.assign(n,{setup(s){return(c,_)=>{const e=o("Resource");return r(),t("div",null,[a(e)])}}});export{p as __pageData,d as default};
