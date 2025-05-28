@@ -22610,6 +22610,10 @@ Used to replace the browser's native scrollbar.
 
 
 
+## Infinite scroll ^(2.10.0)
+
+
+
 ## API
 
 ### Attributes
@@ -22635,9 +22639,10 @@ Used to replace the browser's native scrollbar.
 
 ### Events
 
-| Name   | Description                                           | Type                                                             |
-| ------ | ----------------------------------------------------- | ---------------------------------------------------------------- |
-| scroll | triggers when scrolling, return distance of scrolling | ^[Function]`({ scrollLeft: number, scrollTop: number }) => void` |
+| Name                  | Description                                           | Type                                                                     |
+| --------------------- | ----------------------------------------------------- | ------------------------------------------------------------------------ |
+| scroll                | triggers when scrolling, return distance of scrolling | ^[Function]`({ scrollLeft: number, scrollTop: number }) => void`         |
+| end-reached ^(2.10.0) | triggers when the end of a scroll is triggered        | ^[Function]`(direction: 'top' \| 'bottom' \| 'left' \| 'right') => void` |
 
 ### Slots
 
@@ -22711,6 +22716,49 @@ Used to replace the browser's native scrollbar.
   border-radius: 4px;
   background: var(--el-color-danger-light-9);
   color: var(--el-color-danger);
+}
+</style>
+
+```
+
+### infinite-scroll.vue
+```vue
+<template>
+  <el-scrollbar height="400px" @end-reached="loadMore">
+    <p v-for="item in num" :key="item" class="scrollbar-demo-item">
+      {{ item }}
+    </p>
+  </el-scrollbar>
+</template>
+
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+import type { ScrollbarDirection } from 'element-plus'
+
+const num = ref(30)
+
+const loadMore = (direction: ScrollbarDirection) => {
+  if (direction === 'bottom') {
+    num.value += 5
+  }
+}
+</script>
+
+<style scoped>
+.scrollbar-demo-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  margin: 10px;
+  text-align: center;
+  border-radius: 4px;
+  background: var(--el-color-primary-light-9);
+  color: var(--el-color-primary);
+}
+.el-slider {
+  margin-top: 20px;
 }
 </style>
 
