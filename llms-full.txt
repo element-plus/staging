@@ -23395,7 +23395,7 @@ You can customize the footer of the dropdown.
 
 Create and select new items that are not included in select options
 
-By using the `allow-create` attribute, users can create new items by typing in the input box. Note that for `allow-create` to work, `filterable` must be `true`.
+By using the `allow-create` attribute, users can create new items by typing in the input box. Note that for `allow-create` to work, `filterable` must be `true`. This example also demonstrates `default-first-option`. When this attribute is set to `true`, you can select the first option in the current option list by hitting enter without having to navigate with mouse or arrow keys.
 
 
 
@@ -23480,6 +23480,7 @@ The width of dropdown box is calculated by default based on the value of `label`
 | loading                             | whether Select is loading data from server                                                                                               | ^[boolean]                                                                                                                                                                  | false                                          |
 | loading-text                        | displayed text while loading data from server, default is 'Loading'                                                                      | ^[string]                                                                                                                                                                   | —                                              |
 | reserve-keyword                     | whether reserve the keyword after select filtered option.                                                                                | ^[boolean]                                                                                                                                                                  | true                                           |
+| default-first-option                | select first matching option on enter key. Use with `filterable` or `remote`                                                             | ^[boolean]                                                                                                                                                                  | false                                          |
 | no-match-text                       | displayed text when no data matches the filtering query, you can also use slot `empty`, default is 'No matching data'                    | ^[string]                                                                                                                                                                   | —                                              |
 | no-data-text                        | displayed text when there is no options, you can also use slot empty                                                                     | ^[string]                                                                                                                                                                   | No Data                                        |
 | popper-class                        | custom class name for Select's dropdown                                                                                                  | ^[string]                                                                                                                                                                   | ''                                             |
@@ -23564,6 +23565,7 @@ The width of dropdown box is calculated by default based on the value of `label`
         placeholder="Please select"
         style="width: 240px; margin-right: 16px; vertical-align: middle"
         allow-create
+        default-first-option
         filterable
         multiple
         clearable
@@ -23574,6 +23576,7 @@ The width of dropdown box is calculated by default based on the value of `label`
         placeholder="Please select"
         style="width: 240px; vertical-align: middle"
         allow-create
+        default-first-option
         filterable
         clearable
       />
@@ -23588,6 +23591,7 @@ The width of dropdown box is calculated by default based on the value of `label`
         placeholder="Please select"
         style="width: 240px; margin-right: 16px; vertical-align: middle"
         allow-create
+        default-first-option
         filterable
         multiple
         clearable
