@@ -79,6 +79,7 @@
 - [Skeleton](https://element-plus.org/en-US/component/skeleton)
 - [Slider](https://element-plus.org/en-US/component/slider)
 - [Space](https://element-plus.org/en-US/component/space)
+- [Splitter](https://element-plus.org/en-US/component/splitter)
 - [Statistic](https://element-plus.org/en-US/component/statistic)
 - [Steps](https://element-plus.org/en-US/component/steps)
 - [Switch](https://element-plus.org/en-US/component/switch)
