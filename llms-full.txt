@@ -16151,6 +16151,7 @@ Use attribute `size` to set additional sizes with `large` or `small`.
 | value-on-clear ^(2.2.0)     | value should be set when input box is cleared    | ^[number] / ^[null] / ^[enum]`'min' \| 'max'` | —         |
 | validate-event              | whether to trigger form validation               | ^[boolean]                                    | true      |
 | label ^(a11y) ^(deprecated) | same as `aria-label` in native input             | ^[string]                                     | —         |
+| inputmode ^(2.10.3)         | same as `inputmode` in native input              | ^[string]                                     | —         |
 
 ### Slots
 
@@ -16810,6 +16811,7 @@ Prepend or append an element, generally a label or a button.
 | validate-event              | whether to trigger form validation                                                                                                     | ^[boolean]                                                                                                                                                                                                                   | true    |
 | input-style                 | the style of the input element or textarea element                                                                                     | ^[string] / ^[object]`CSSProperties \| CSSProperties[] \| string[]`                                                                                                                                                          | {}      |
 | label ^(a11y) ^(deprecated) | same as `aria-label` in native input                                                                                                   | ^[string]                                                                                                                                                                                                                    | —       |
+| inputmode ^(2.10.3)         | same as `inputmode` in native input                                                                                                    | ^[string]                                                                                                                                                                                                                    | —       |
 
 ### Events
 
