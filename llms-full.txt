@@ -16724,8 +16724,6 @@ URL: https://element-plus.org/en-US/component/input
 
 Input data using mouse or keyboard.
 
-
-
 ## Basic usage
 
 
@@ -23563,6 +23561,10 @@ The basic multi-select selector with tags
 
 
 
+## Sizes
+
+
+
 ## Hide extra tags when the selected items are too many
 
 You can collapse tags to a text by using `collapse-tags` attribute. You can check them when mouse hover collapse text by using `collapse-tags-tooltip` attribute.
@@ -23840,28 +23842,12 @@ const options = Array.from({ length: 1000 }).map((_, idx) => ({
 ### basic-usage.vue
 ```vue
 <template>
-  <div class="flex flex-wrap gap-4 items-center">
-    <el-select-v2
-      v-model="value"
-      :options="options"
-      placeholder="Please select"
-      size="large"
-      style="width: 240px"
-    />
-    <el-select-v2
-      v-model="value"
-      :options="options"
-      placeholder="Please select"
-      style="width: 240px"
-    />
-    <el-select-v2
-      v-model="value"
-      :options="options"
-      placeholder="Please select"
-      size="small"
-      style="width: 240px"
-    />
-  </div>
+  <el-select-v2
+    v-model="value"
+    :options="options"
+    placeholder="Please select"
+    style="width: 240px"
+  />
 </template>
 
 <script lang="ts" setup>
@@ -23875,12 +23861,6 @@ const options = Array.from({ length: 1000 }).map((_, idx) => ({
   label: `${initials[idx % 10]}${idx}`,
 }))
 </script>
-
-<style scoped>
-.example-showcase .el-select-v2 {
-  margin-right: 20px;
-}
-</style>
 
 ```
 
@@ -24863,6 +24843,53 @@ const remoteMethod = (query: string) => {
 
 ```
 
+### size.vue
+```vue
+<template>
+  <div class="flex flex-wrap gap-4 items-center">
+    <el-select-v2
+      v-model="value"
+      :options="options"
+      placeholder="Please select"
+      size="large"
+      style="width: 240px"
+    />
+    <el-select-v2
+      v-model="value"
+      :options="options"
+      placeholder="Please select"
+      style="width: 240px"
+    />
+    <el-select-v2
+      v-model="value"
+      :options="options"
+      placeholder="Please select"
+      size="small"
+      style="width: 240px"
+    />
+  </div>
+</template>
+
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const initials = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']
+
+const value = ref()
+const options = Array.from({ length: 1000 }).map((_, idx) => ({
+  value: `Option ${idx + 1}`,
+  label: `${initials[idx % 10]}${idx}`,
+}))
+</script>
+
+<style scoped>
+.example-showcase .el-select-v2 {
+  margin-right: 20px;
+}
+</style>
+
+```
+
 ### use-valueKey.vue
 ```vue
 <template>
@@ -24927,6 +24954,10 @@ Disable the whole component.
 ## Clearable single select
 
 You can clear Select using a clear icon.
+
+
+
+## Sizes
 
 
 
@@ -25179,42 +25210,14 @@ const options = [
 ### basic-usage.vue
 ```vue
 <template>
-  <div class="flex flex-wrap gap-4 items-center">
-    <el-select
-      v-model="value"
-      placeholder="Select"
-      size="large"
-      style="width: 240px"
-    >
-      <el-option
-        v-for="item in options"
-        :key="item.value"
-        :label="item.label"
-        :value="item.value"
-      />
-    </el-select>
-    <el-select v-model="value" placeholder="Select" style="width: 240px">
-      <el-option
-        v-for="item in options"
-        :key="item.value"
-        :label="item.label"
-        :value="item.value"
-      />
-    </el-select>
-    <el-select
-      v-model="value"
-      placeholder="Select"
-      size="small"
-      style="width: 240px"
-    >
-      <el-option
-        v-for="item in options"
-        :key="item.value"
-        :label="item.label"
-        :value="item.value"
-      />
-    </el-select>
-  </div>
+  <el-select v-model="value" placeholder="Select" style="width: 240px">
+    <el-option
+      v-for="item in options"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value"
+    />
+  </el-select>
 </template>
 
 <script lang="ts" setup>
@@ -26429,6 +26432,78 @@ const states = [
   'West Virginia',
   'Wisconsin',
   'Wyoming',
+]
+</script>
+
+```
+
+### size.vue
+```vue
+<template>
+  <div class="flex flex-wrap gap-4 items-center">
+    <el-select
+      v-model="value"
+      placeholder="Select"
+      size="large"
+      style="width: 240px"
+    >
+      <el-option
+        v-for="item in options"
+        :key="item.value"
+        :label="item.label"
+        :value="item.value"
+      />
+    </el-select>
+    <el-select v-model="value" placeholder="Select" style="width: 240px">
+      <el-option
+        v-for="item in options"
+        :key="item.value"
+        :label="item.label"
+        :value="item.value"
+      />
+    </el-select>
+    <el-select
+      v-model="value"
+      placeholder="Select"
+      size="small"
+      style="width: 240px"
+    >
+      <el-option
+        v-for="item in options"
+        :key="item.value"
+        :label="item.label"
+        :value="item.value"
+      />
+    </el-select>
+  </div>
+</template>
+
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const value = ref('')
+
+const options = [
+  {
+    value: 'Option1',
+    label: 'Option1',
+  },
+  {
+    value: 'Option2',
+    label: 'Option2',
+  },
+  {
+    value: 'Option3',
+    label: 'Option3',
+  },
+  {
+    value: 'Option4',
+    label: 'Option4',
+  },
+  {
+    value: 'Option5',
+    label: 'Option5',
+  },
 ]
 </script>
 
