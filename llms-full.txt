@@ -4908,21 +4908,25 @@ You can customize tags.
 
 
 
-## Custom Header & Footer of the Dropdown ^(2.10.5)
-
-You can customize both the header and footer of the dropdown using slots.
-
-
-
-## Click to Select Node ^(2.10.5)
-
-Allows selecting nodes by clicking, with optional control visibility.
-
-
-
-## Show Checked Strategy
+## Show Checked Strategy ^(2.10.5)
 
 Control how selected values are displayed in multiple selection mode.
+
+
+
+## Click to Check Node ^(2.10.5)
+
+Only using `multiple` or `checkStrictly` attributes.
+
+You can add `checkOnClickNode` to be able to click on the node in addition with the prefix icon.\
+Toggle the visibility of the prefix with `showPrefix`.
+
+
+
+
+## Custom Header & Footer ^(2.10.5)
+
+You can customize both the header and footer of the dropdown using slots.
 
 
 
@@ -5047,6 +5051,7 @@ Control how selected values are displayed in multiple selection mode.
 | leaf                       | specify which key of node object is used as the node's leaf field                                          | ^[string]                                           | leaf     |
 | hoverThreshold             | hover threshold of expanding options                                                                       | ^[number]                                           | 500      |
 | checkOnClickNode ^(2.10.5) | whether to check or uncheck node when clicking on the node                                                 | ^[boolean]                                          | false    |
+| checkOnClickLeaf ^(2.10.5) | whether to check or uncheck node when clicking on leaf node (last children).                               | ^[boolean]                                          | true     |
 | showPrefix ^(2.10.5)       | whether to show the radio or checkbox prefix                                                               | ^[boolean]                                          | true     |
 
 ## Type Declarations
@@ -5751,23 +5756,33 @@ const options = [
 ### check-on-click-node.vue
 ```vue
 <template>
-  <el-switch
-    v-model="showPrefix"
-    active-text="show prefix"
-    inactive-text="hide prefix"
-  />
-  <div class="m-4">
-    <p>Click to select any level (Single mode)</p>
-    <el-cascader v-model="value" :options="options" :props="props1" clearable />
-  </div>
-  <div class="m-4">
-    <p>Click to select any level (Multiple mode)</p>
-    <el-cascader
-      v-model="value2"
-      :options="options"
-      :props="props2"
-      clearable
+  <div class="flex flex-col items-center">
+    <el-switch
+      v-model="showPrefix"
+      active-text="show prefix"
+      inactive-text="hide prefix"
     />
+    <div class="flex flex-wrap">
+      <div class="m-4">
+        <p>checkStrictly | Single mode</p>
+        <el-cascader
+          v-model="value"
+          :options="options"
+          :props="props1"
+          clearable
+        />
+      </div>
+      <div class="m-4">
+        <p>Multiple mode</p>
+        <el-cascader
+          v-model="value2"
+          show-checked-strategy="parent"
+          :options="options"
+          :props="props2"
+          clearable
+        />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -5786,7 +5801,6 @@ const props1 = computed(() => ({
 const props2 = computed(() => ({
   showPrefix: showPrefix.value,
   multiple: true,
-  checkStrictly: true,
   checkOnClickNode: true,
 }))
 
