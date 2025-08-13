@@ -24904,12 +24904,11 @@ const options = Array.from({ length: 1000 }).map((_, idx) => ({
 
 <script lang="ts" setup>
 import { nextTick, ref } from 'vue'
-import { ElSelectV2 } from 'element-plus'
 
-import type { CheckboxValueType } from 'element-plus'
+import type { CheckboxValueType, SelectV2Instance } from 'element-plus'
 
 const initials = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']
-const select = ref<InstanceType<typeof ElSelectV2>>()
+const select = ref<SelectV2Instance>()
 const isAdding = ref(false)
 const value = ref<CheckboxValueType[]>([])
 const optionName = ref('')
@@ -39652,9 +39651,8 @@ const data = createData(4, 30, 40)
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import { ElTreeV2 } from 'element-plus'
 
-import type { TreeNodeData } from 'element-plus'
+import type { TreeNodeData, TreeV2Instance } from 'element-plus'
 
 interface Tree {
   id: string
@@ -39689,7 +39687,7 @@ const createData = (
 }
 
 const query = ref('')
-const treeRef = ref<InstanceType<typeof ElTreeV2>>()
+const treeRef = ref<TreeV2Instance>()
 const data = createData(4, 30, 5)
 const props = {
   value: 'id',
