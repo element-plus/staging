@@ -24,6 +24,7 @@
 - [Color](https://element-plus.org/en-US/component/color)
 - [Config Provider](https://element-plus.org/en-US/component/config-provider)
 - [Container](https://element-plus.org/en-US/component/container)
+- [DatePickerPanel](https://element-plus.org/en-US/component/date-picker-panel)
 - [DatePicker](https://element-plus.org/en-US/component/date-picker)
 - [DateTimePicker](https://element-plus.org/en-US/component/datetime-picker)
 - [Descriptions](https://element-plus.org/en-US/component/descriptions)

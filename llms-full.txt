@@ -9112,6 +9112,204 @@ const tableData = ref(Array.from({ length: 20 }).fill(item))
 
 
 ---
+Title: DatePickerPanel
+URL: https://element-plus.org/en-US/component/date-picker-panel
+---
+
+# DatePickerPanel ^(beta)
+
+`DatePickerPanel` is the core component of `DatePicker`.
+
+## Enter Date
+
+Basic date picker measured by 'day'.
+
+
+
+## Border
+
+By default the date-picker-panel is bordered but in some case you don't want it.
+For example `DatePicker` don't inherit `border`.
+
+
+
+## Disabled
+
+The `disabled` attribute determines if the date picker is fully disabled.
+
+
+
+## Types
+
+The measurement is determined by the `type` attribute.
+
+
+
+## Localization
+
+The default locale of is English, if you need to use other languages, please check [Internationalization](/en-US/guide/i18n)
+
+Note, date time locale (month name, first day of the week ...) are also configured in localization.
+
+## API
+
+### Attributes
+
+| Name                  | Description                                                                                           | Type                                                                                                                                                           | Default    |
+| --------------------- | ----------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
+| model-value / v-model | binding value, if it is an array, the length should be 2                                              | ^[number] / ^[string] / ^[object]`Date \| [Date, Date] \| [string, string]`                                                                                    | ''         |
+| border                | whether the date picker is bordered                                                                   | ^[boolean]                                                                                                                                                     | true       |
+| disabled              | whether DatePicker is disabled                                                                        | ^[boolean]                                                                                                                                                     | false      |
+| clearable             | whether to show clear button                                                                          | ^[boolean]                                                                                                                                                     | true       |
+| type                  | type of the picker                                                                                    | ^[enum]`'year' \| 'years' \|'month' \| 'months' \| 'date' \| 'dates' \| 'datetime' \| 'week' \| 'datetimerange' \| 'daterange' \| 'monthrange' \| 'yearrange'` | date       |
+| format                | format of the displayed value in the input box (in datetime/datetimerange mode)                       | ^[string]                                                                                                                                                      | YYYY-MM-DD |
+| default-value         | optional, default date of the calendar                                                                | ^[object]`Date \| [Date, Date]`                                                                                                                                | —          |
+| default-time          | optional, the time value to use when selecting date range                                             | ^[object]`Date \| [Date, Date]`                                                                                                                                | —          |
+| value-format          | optional, format of binding value. If not specified, the binding value will be a Date object          | ^[string]                                                                                                                                                      | —          |
+| unlink-panels         | unlink two date-panels in range-picker                                                                | ^[boolean]                                                                                                                                                     | false      |
+| disabled-date         | a function determining if a date is disabled with that date as its parameter. Should return a Boolean | ^[Function]`(data: Date) => boolean`                                                                                                                           | —          |
+| shortcuts             | an object array to set shortcut options                                                               | ^[object]`Array<{ text: string, value: Date \| Function }>`                                                                                                    | []         |
+| cell-class-name       | set custom className                                                                                  | ^[Function]`(data: Date) => string`                                                                                                                            | —          |
+| show-footer           | whether to show footer                                                                                | ^[boolean]                                                                                                                                                     | false      |
+| show-confirm          | whether to show the confirm button                                                                    | ^[boolean]                                                                                                                                                     | false      |
+| show-week-number      | show the week number besides the week                                                                 | `boolean`                                                                                                                                                      | false      |
+
+### Events
+
+| Name            | Description                                                           | Type                                                                                      |
+| --------------- | --------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| calendar-change | triggers when the calendar selected date is changed. Only for `range` | ^[Function]`(val: [Date, null \| Date]) => void`                                          |
+| panel-change    | triggers when the navigation button click.                            | ^[Function]`(date: Date \| [Date, Date], mode: 'month' \| 'year', view?: string) => void` |
+
+### Slots
+
+| Name       | Description         |
+| ---------- | ------------------- |
+| default    | custom cell content |
+| prev-month | prev month icon     |
+| next-month | next month icon     |
+| prev-year  | prev year icon      |
+| next-year  | next year icon      |
+
+## Vue Examples
+
+### all-types.vue
+```vue
+<template>
+  <div>
+    <div class="flex gap-4">
+      <div class="flex flex-col basis-150px gap-1">
+        <span>Type:</span>
+        <el-select v-model="type">
+          <el-option
+            v-for="optionType in types"
+            :key="optionType"
+            :value="optionType"
+          />
+        </el-select>
+      </div>
+    </div>
+    <el-divider />
+    <div class="flex justify-center">
+      <el-date-picker-panel v-model="date" :type="type" />
+    </div>
+  </div>
+</template>
+
+<script lang="ts" setup>
+import { ref, watch } from 'vue'
+
+import type { DatePickerType } from 'element-plus'
+
+const date = ref()
+const type = ref<DatePickerType>('date')
+
+watch(type, () => {
+  date.value = undefined
+})
+
+const types: DatePickerType[] = [
+  'year',
+  'years',
+  'month',
+  'months',
+  'date',
+  'dates',
+  'week',
+  'datetime',
+  'datetimerange',
+  'daterange',
+  'monthrange',
+  'yearrange',
+]
+</script>
+
+```
+
+### basic.vue
+```vue
+<template>
+  <div class="flex justify-center">
+    <el-date-picker-panel v-model="value" />
+  </div>
+</template>
+
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const value = ref()
+</script>
+
+```
+
+### border.vue
+```vue
+<template>
+  <div class="text-center">No border:</div>
+  <el-divider />
+  <div class="flex content-center justify-center gap-4">
+    <div class="p-5">
+      <el-date-picker-panel v-model="value" :border="false" />
+    </div>
+    <el-divider class="h-auto" direction="vertical" />
+    <el-card>
+      <el-date-picker-panel v-model="value" :border="false" />
+    </el-card>
+  </div>
+</template>
+
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const value = ref()
+</script>
+
+```
+
+### disabled.vue
+```vue
+<template>
+  <div class="flex flex-col items-center">
+    <el-switch
+      v-model="disabled"
+      active-text="Disabled"
+      inactive-text="Enabled"
+    />
+    <el-date-picker-panel v-model="value" :disabled="disabled" />
+  </div>
+</template>
+
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const value = ref()
+const disabled = ref(true)
+</script>
+
+```
+
+
+---
 Title: DatePicker
 URL: https://element-plus.org/en-US/component/date-picker
 ---
@@ -9260,6 +9458,7 @@ Note, date time locale (month name, first day of the week ...) are also configur
 | fallback-placements ^(2.8.4) | list of possible positions for Tooltip [popper.js](https://popper.js.org/docs/v2/modifiers/flip/#fallbackplacements)         | ^[array]`Placement[]`                                                                                                                                          | —             |
 | placement ^(2.8.4)           | position of dropdown                                                                                                         | `Placement`                                                                                                                                                    | bottom        |
 | show-footer ^(2.10.5)        | whether to show footer                                                                                                       | ^[boolean]                                                                                                                                                     | true          |
+| show-confirm ^(2.11.0)       | whether to show the confirm button                                                                                           | ^[boolean]                                                                                                                                                     | true          |
 | show-week-number ^(2.10.3)   | show the week number besides the week                                                                                        | `boolean`                                                                                                                                                      | false         |
 
 ### Events
@@ -10510,6 +10709,7 @@ Custom icons available with slots.
 | value-on-clear ^(2.7.0)    | clear return value, [see config-provider](/en-US/component/config-provider#empty-values-configurations)        | ^[string] / ^[number] / ^[boolean] / ^[Function]                                               | —                   |
 | show-now ^(2.8.7)          | whether to show the now button                                                                                 | ^[boolean]                                                                                     | true                |
 | show-footer ^(2.10.5)      | whether to show footer                                                                                         | ^[boolean]                                                                                     | true                |
+| show-confirm ^(2.11.0)     | whether to show the confirm button                                                                             | ^[boolean]                                                                                     | true                |
 | show-week-number ^(2.10.3) | show the week number besides the week                                                                          | `boolean`                                                                                      | false               |
 
 ## Events
