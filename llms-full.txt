@@ -8285,14 +8285,15 @@ In this section, you can learn how to use Config Provider to provide experimenta
 
 ### Message Attribute
 
-| Attribute          | Description                                                                    | Type       | Default |
-| ------------------ | ------------------------------------------------------------------------------ | ---------- | ------- |
-| max                | the maximum number of messages that can be displayed at the same time          | ^[number]  | —       |
-| grouping ^(2.8.2)  | merge messages with the same content, type of VNode message is not supported   | ^[boolean] | —       |
-| duration ^(2.8.2)  | display duration, millisecond. If set to 0, it will not turn off automatically | ^[number]  | —       |
-| showClose ^(2.8.2) | whether to show a close button                                                 | ^[boolean] | —       |
-| offset ^(2.8.2)    | set the distance to the top of viewport                                        | ^[number]  | —       |
-| plain ^(2.9.11)    | whether message is plain                                                       | ^[boolean] | —       |
+| Attribute           | Description                                                                    | Type                                                                                       | Default |
+| ------------------- | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------- |
+| max                 | the maximum number of messages that can be displayed at the same time          | ^[number]                                                                                  | —       |
+| grouping ^(2.8.2)   | merge messages with the same content, type of VNode message is not supported   | ^[boolean]                                                                                 | —       |
+| duration ^(2.8.2)   | display duration, millisecond. If set to 0, it will not turn off automatically | ^[number]                                                                                  | —       |
+| showClose ^(2.8.2)  | whether to show a close button                                                 | ^[boolean]                                                                                 | —       |
+| offset ^(2.8.2)     | set the distance to the top of viewport                                        | ^[number]                                                                                  | —       |
+| plain ^(2.9.11)     | whether message is plain                                                       | ^[boolean]                                                                                 | —       |
+| placement ^(2.11.0) | message placement position                                                     | ^[enum]`'top' \| 'top-left' \| 'top-right' \| 'bottom' \| 'bottom-left' \| 'bottom-right'` | —       |
 
 ### Config Provider Slots
 
@@ -8722,9 +8723,11 @@ import { ElMessage } from 'element-plus'
 const config = reactive({
   max: 3,
   plain: true,
+  placement: 'bottom',
 })
+
 const open = () => {
-  ElMessage('This is a message.')
+  ElMessage('This is a message from bottom.')
 }
 </script>
 
@@ -19440,7 +19443,7 @@ Used to show feedback after an activity. The difference with Notification is tha
 
 ## Basic usage
 
-Displays at the top, and disappears after 3 seconds.
+Displays at the top by default, and disappears after 3 seconds. You can control the position using the `placement` property.
 
 
 
@@ -19473,6 +19476,12 @@ A close button can be added.
 ## Grouping
 
 merge messages with the same content.
+
+
+
+## Placement ^(2.11.0)
+
+Control the position where messages appear. Messages can be displayed at the top (default) or other placements of the viewport.
 
 
 
@@ -19509,21 +19518,22 @@ ElMessage({}, appContext)
 
 ### Options
 
-| Name                     | Description                                                                                          | Type                                                                       | Default |
-| ------------------------ | ---------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- | ------- |
-| message                  | message text                                                                                         | ^[string] / ^[VNode] / ^[Function]`() => VNode`                            | ''      |
-| type                     | message type                                                                                         | ^[enum]`'primary' (2.9.11) \| 'success' \| 'warning' \| 'info' \| 'error'` | info    |
-| plain ^(2.6.3)           | whether message is plain                                                                             | ^[boolean]                                                                 | false   |
-| icon                     | custom icon component, overrides `type`                                                              | ^[string] / ^[Component]                                                   | —       |
-| dangerouslyUseHTMLString | whether `message` is treated as HTML string                                                          | ^[boolean]                                                                 | false   |
-| customClass              | custom class name for Message                                                                        | ^[string]                                                                  | ''      |
-| duration                 | display duration, millisecond. If set to 0, it will not turn off automatically                       | ^[number]                                                                  | 3000    |
-| showClose                | whether to show a close button                                                                       | ^[boolean]                                                                 | false   |
-| onClose                  | callback function when closed with the message instance as the parameter                             | ^[Function]`() => void`                                                    | —       |
-| offset                   | set the distance to the top of viewport                                                              | ^[number]                                                                  | 16      |
-| appendTo                 | set the root element for the message, default to `document.body`                                     | ^[CSSSelector] / ^[HTMLElement]                                            | —       |
-| grouping                 | merge messages with the same content, type of VNode message is not supported                         | ^[boolean]                                                                 | false   |
-| repeatNum                | The number of repetitions, similar to badge, is used as the initial number when used with `grouping` | ^[number]                                                                  | 1       |
+| Name                     | Description                                                                                            | Type                                                                                       | Default |
+| ------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------- |
+| message                  | message text                                                                                           | ^[string] / ^[VNode] / ^[Function]`() => VNode`                                            | ''      |
+| type                     | message type                                                                                           | ^[enum]`'primary' (2.9.11) \| 'success' \| 'warning' \| 'info' \| 'error'`                 | info    |
+| plain ^(2.6.3)           | whether message is plain                                                                               | ^[boolean]                                                                                 | false   |
+| icon                     | custom icon component, overrides `type`                                                                | ^[string] / ^[Component]                                                                   | —       |
+| dangerouslyUseHTMLString | whether `message` is treated as HTML string                                                            | ^[boolean]                                                                                 | false   |
+| customClass              | custom class name for Message                                                                          | ^[string]                                                                                  | ''      |
+| duration                 | display duration, millisecond. If set to 0, it will not turn off automatically                         | ^[number]                                                                                  | 3000    |
+| showClose                | whether to show a close button                                                                         | ^[boolean]                                                                                 | false   |
+| onClose                  | callback function when closed with the message instance as the parameter                               | ^[Function]`() => void`                                                                    | —       |
+| offset                   | set the distance to the viewport edge (top when placement is 'top', bottom when placement is 'bottom') | ^[number]                                                                                  | 16      |
+| placement ^(2.11.0)      | message placement position                                                                             | ^[enum]`'top' \| 'top-left' \| 'top-right' \| 'bottom' \| 'bottom-left' \| 'bottom-right'` | top     |
+| appendTo                 | set the root element for the message, default to `document.body`                                       | ^[CSSSelector] / ^[HTMLElement]                                                            | —       |
+| grouping                 | merge messages with the same content, type of VNode message is not supported                           | ^[boolean]                                                                                 | false   |
+| repeatNum                | The number of repetitions, similar to badge, is used as the initial number when used with `grouping`   | ^[number]                                                                                  | 1       |
 
 ### Methods
 
@@ -19673,6 +19683,82 @@ const open = () => {
     message: 'This is a message.',
     grouping: true,
     type: 'success',
+  })
+}
+</script>
+
+```
+
+### placement.vue
+```vue
+<template>
+  <div class="flex flex-wrap gap-1">
+    <el-button class="!ml-0" :plain="true" @click="openMsg()"> Top </el-button>
+    <el-button class="!ml-0" :plain="true" @click="openMsg('top-left')">
+      Top Left
+    </el-button>
+    <el-button class="!ml-0" :plain="true" @click="openMsg('top-right')">
+      Top Right
+    </el-button>
+    <el-button class="!ml-0" :plain="true" @click="openMsg('bottom')">
+      Bottom
+    </el-button>
+    <el-button class="!ml-0" :plain="true" @click="openMsg('bottom-left')">
+      Bottom Left
+    </el-button>
+    <el-button class="!ml-0" :plain="true" @click="openMsg('bottom-right')">
+      Bottom Right
+    </el-button>
+  </div>
+</template>
+
+<script lang="ts" setup>
+import { ElMessage } from 'element-plus'
+
+import type { MessagePlacement, MessageType } from 'element-plus'
+
+let topCount = 0
+let bottomCount = 0
+let topLeftCount = 0
+let topRightCount = 0
+let bottomLeftCount = 0
+let bottomRightCount = 0
+
+const openMsg = (placement: MessagePlacement = 'top') => {
+  let count = 0
+  let type: MessageType = 'success'
+
+  switch (placement) {
+    case 'top':
+      count = ++topCount
+      type = 'success'
+      break
+    case 'bottom':
+      count = ++bottomCount
+      type = 'warning'
+      break
+    case 'top-left':
+      count = ++topLeftCount
+      type = 'info'
+      break
+    case 'top-right':
+      count = ++topRightCount
+      type = 'primary'
+      break
+    case 'bottom-left':
+      count = ++bottomLeftCount
+      type = 'warning'
+      break
+    case 'bottom-right':
+      count = ++bottomRightCount
+      type = 'error'
+      break
+  }
+
+  ElMessage({
+    message: `This is a message from the ${placement} ${count}`,
+    type,
+    placement,
   })
 }
 </script>
