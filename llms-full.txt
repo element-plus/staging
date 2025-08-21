@@ -1378,11 +1378,11 @@ app.component(ElCollapseTransition.name, ElCollapseTransition)
   <div>
     <el-button @click="show = !show">Click Me</el-button>
 
-    <div style="margin-top: 20px">
+    <div style="margin-top: 20px; height: 210px">
       <el-collapse-transition>
-        <div v-show="show" style="height: 400px">
+        <div v-show="show">
           <div class="transition-box">el-collapse-transition</div>
-          <div class="transition-box">el-collapse-transition</div>
+          <div class="transition-box mt-[10px]">el-collapse-transition</div>
         </div>
       </el-collapse-transition>
     </div>
@@ -1395,18 +1395,16 @@ import { ref } from 'vue'
 const show = ref(true)
 </script>
 
-<style>
+<style scoped>
 .transition-box {
-  margin-bottom: 10px;
   width: 200px;
   height: 100px;
-  border-radius: 4px;
-  background-color: #409eff;
+  border-radius: var(--el-border-radius-base);
+  background-color: var(--el-color-primary);
   text-align: center;
   color: #fff;
   padding: 40px 20px;
   box-sizing: border-box;
-  margin-right: 20px;
 }
 </style>
 
@@ -1418,7 +1416,7 @@ const show = ref(true)
   <div>
     <el-button @click="show = !show">Click Me</el-button>
 
-    <div style="display: flex; margin-top: 20px; height: 100px">
+    <div class="fade-container">
       <transition name="el-fade-in-linear">
         <div v-show="show" class="transition-box">.el-fade-in-linear</div>
       </transition>
@@ -1435,18 +1433,24 @@ import { ref } from 'vue'
 const show = ref(true)
 </script>
 
-<style>
+<style scoped>
+.fade-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  min-height: 100px;
+  margin-top: 20px;
+}
+
 .transition-box {
-  margin-bottom: 10px;
   width: 200px;
   height: 100px;
-  border-radius: 4px;
-  background-color: #409eff;
+  border-radius: var(--el-border-radius-base);
+  background-color: var(--el-color-primary);
   text-align: center;
   color: #fff;
   padding: 40px 20px;
   box-sizing: border-box;
-  margin-right: 20px;
 }
 </style>
 
@@ -1458,7 +1462,7 @@ const show = ref(true)
   <div>
     <el-button @click="show = !show">Click Me</el-button>
 
-    <div style="display: flex; margin-top: 20px; height: 100px">
+    <div class="transition-container">
       <transition name="el-zoom-in-left">
         <div v-show="show" class="transition-box">.el-zoom-in-left</div>
       </transition>
@@ -1484,18 +1488,29 @@ import { ref } from 'vue'
 const show = ref(true)
 </script>
 
-<style>
+<style scoped>
+.transition-container {
+  display: flex;
+  margin-top: 20px;
+  min-height: 100px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
 .transition-box {
-  margin-bottom: 10px;
   width: 200px;
   height: 100px;
-  border-radius: 4px;
-  background-color: #409eff;
+  border-radius: var(--el-border-radius-base);
+  background-color: var(--el-color-primary);
   text-align: center;
   color: #fff;
-  padding: 40px 20px;
+  padding: 20px;
   box-sizing: border-box;
-  margin-right: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  word-break: break-word;
+  font-size: 14px;
 }
 </style>
 
@@ -2532,30 +2547,26 @@ onMounted(() => {
 ### autocomplete.vue
 ```vue
 <template>
-  <div class="flex gap-4">
-    <div>
-      <div class="sub-title my-2 text-sm text-gray-600">
-        list suggestions when activated
-      </div>
+  <div class="demo-autocomplete">
+    <div class="demo-block">
+      <div class="demo-title">list suggestions when activated</div>
       <el-autocomplete
         v-model="state1"
         :fetch-suggestions="querySearch"
         clearable
-        class="inline-input w-50"
+        class="w-50"
         placeholder="Please Input"
         @select="handleSelect"
       />
     </div>
-    <div>
-      <div class="sub-title my-2 text-sm text-gray-600">
-        list suggestions on input
-      </div>
+    <div class="demo-block">
+      <div class="demo-title">list suggestions on input</div>
       <el-autocomplete
         v-model="state2"
         :fetch-suggestions="querySearch"
         :trigger-on-focus="false"
         clearable
-        class="inline-input w-50"
+        class="w-50"
         placeholder="Please Input"
         @select="handleSelect"
       />
@@ -2609,6 +2620,38 @@ onMounted(() => {
   restaurants.value = loadAll()
 })
 </script>
+
+<style scoped>
+.demo-autocomplete {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.demo-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.demo-title {
+  font-size: 0.875rem;
+  color: var(--el-text-color-secondary);
+  min-height: 2.5em;
+  display: flex;
+  align-items: center;
+}
+
+@media screen and (max-width: 768px) {
+  .demo-autocomplete {
+    gap: 1rem;
+  }
+
+  .demo-block {
+    width: 100%;
+  }
+}
+</style>
 
 ```
 
@@ -2726,12 +2769,13 @@ const handleClear = () => {
 ### custom-loading.vue
 ```vue
 <template>
-  <div class="flex gap-4">
-    <div>
-      <div class="sub-title my-2 text-sm text-gray-600">loading icon1</div>
+  <div class="demo-autocomplete">
+    <div class="demo-block">
+      <div class="demo-title">loading icon1</div>
       <el-autocomplete
         v-model="state"
         :fetch-suggestions="querySearchAsync"
+        class="w-50"
         placeholder="Please input"
         @select="handleSelect"
       >
@@ -2742,11 +2786,12 @@ const handleClear = () => {
         </template>
       </el-autocomplete>
     </div>
-    <div>
-      <div class="sub-title my-2 text-sm text-gray-600">loading icon2</div>
+    <div class="demo-block">
+      <div class="demo-title">loading icon2</div>
       <el-autocomplete
         v-model="state"
         :fetch-suggestions="querySearchAsync"
+        class="w-50"
         placeholder="Please input"
         @select="handleSelect"
       >
@@ -2822,6 +2867,37 @@ onMounted(() => {
   links.value = loadAll()
 })
 </script>
+
+<style scoped>
+.demo-autocomplete {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.demo-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.demo-title {
+  font-size: 0.875rem;
+  color: var(--el-text-color-secondary);
+  min-height: 2.5em;
+  display: flex;
+  align-items: center;
+}
+
+@media screen and (max-width: 768px) {
+  .demo-autocomplete {
+    gap: 1rem;
+  }
+  .demo-block {
+    width: 100%;
+  }
+}
+</style>
 
 <style>
 .circular {
@@ -3024,7 +3100,7 @@ Set how the image fit its container for an image avatar, same as [object-fit](ht
 ```vue
 <template>
   <el-row class="demo-avatar demo-basic">
-    <el-col :span="12">
+    <el-col :lg="12" :md="12">
       <div class="sub-title">circle</div>
       <div class="demo-basic--circle">
         <div class="block">
@@ -3035,7 +3111,7 @@ Set how the image fit its container for an image avatar, same as [object-fit](ht
         </div>
       </div>
     </el-col>
-    <el-col :span="12">
+    <el-col :lg="12" :md="12">
       <div class="sub-title">square</div>
       <div class="demo-basic--circle">
         <div class="block">
@@ -3086,6 +3162,11 @@ const { circleUrl, squareUrl, sizeList } = toRefs(state)
 }
 .demo-basic .el-col:not(:last-child) {
   border-right: 1px solid var(--el-border-color);
+}
+@media screen and (max-width: 992px) {
+  .demo-basic .el-col:not(:last-child) {
+    border-right: none;
+  }
 }
 </style>
 
@@ -3932,40 +4013,42 @@ We will calculate hover color & active color automatically.
 ### basic.vue
 ```vue
 <template>
-  <div class="mb-4">
-    <el-button>Default</el-button>
-    <el-button type="primary">Primary</el-button>
-    <el-button type="success">Success</el-button>
-    <el-button type="info">Info</el-button>
-    <el-button type="warning">Warning</el-button>
-    <el-button type="danger">Danger</el-button>
-  </div>
+  <div class="button-example">
+    <div class="button-row">
+      <el-button>Default</el-button>
+      <el-button type="primary">Primary</el-button>
+      <el-button type="success">Success</el-button>
+      <el-button type="info">Info</el-button>
+      <el-button type="warning">Warning</el-button>
+      <el-button type="danger">Danger</el-button>
+    </div>
 
-  <div class="mb-4">
-    <el-button plain>Plain</el-button>
-    <el-button type="primary" plain>Primary</el-button>
-    <el-button type="success" plain>Success</el-button>
-    <el-button type="info" plain>Info</el-button>
-    <el-button type="warning" plain>Warning</el-button>
-    <el-button type="danger" plain>Danger</el-button>
-  </div>
+    <div class="button-row">
+      <el-button plain>Plain</el-button>
+      <el-button type="primary" plain>Primary</el-button>
+      <el-button type="success" plain>Success</el-button>
+      <el-button type="info" plain>Info</el-button>
+      <el-button type="warning" plain>Warning</el-button>
+      <el-button type="danger" plain>Danger</el-button>
+    </div>
 
-  <div class="mb-4">
-    <el-button round>Round</el-button>
-    <el-button type="primary" round>Primary</el-button>
-    <el-button type="success" round>Success</el-button>
-    <el-button type="info" round>Info</el-button>
-    <el-button type="warning" round>Warning</el-button>
-    <el-button type="danger" round>Danger</el-button>
-  </div>
+    <div class="button-row">
+      <el-button round>Round</el-button>
+      <el-button type="primary" round>Primary</el-button>
+      <el-button type="success" round>Success</el-button>
+      <el-button type="info" round>Info</el-button>
+      <el-button type="warning" round>Warning</el-button>
+      <el-button type="danger" round>Danger</el-button>
+    </div>
 
-  <div>
-    <el-button :icon="Search" circle />
-    <el-button type="primary" :icon="Edit" circle />
-    <el-button type="success" :icon="Check" circle />
-    <el-button type="info" :icon="Message" circle />
-    <el-button type="warning" :icon="Star" circle />
-    <el-button type="danger" :icon="Delete" circle />
+    <div class="button-row">
+      <el-button :icon="Search" circle />
+      <el-button type="primary" :icon="Edit" circle />
+      <el-button type="success" :icon="Check" circle />
+      <el-button type="info" :icon="Message" circle />
+      <el-button type="warning" :icon="Star" circle />
+      <el-button type="danger" :icon="Delete" circle />
+    </div>
   </div>
 </template>
 
@@ -3979,6 +4062,25 @@ import {
   Star,
 } from '@element-plus/icons-vue'
 </script>
+
+<style scoped>
+.button-example {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+}
+
+.button-row > * {
+  margin: 0;
+}
+</style>
 
 ```
 
@@ -4005,24 +4107,45 @@ import { isDark } from '~/composables/dark'
 ### disabled.vue
 ```vue
 <template>
-  <div class="mb-4">
-    <el-button disabled>Default</el-button>
-    <el-button type="primary" disabled>Primary</el-button>
-    <el-button type="success" disabled>Success</el-button>
-    <el-button type="info" disabled>Info</el-button>
-    <el-button type="warning" disabled>Warning</el-button>
-    <el-button type="danger" disabled>Danger</el-button>
-  </div>
+  <div class="button-example">
+    <div class="button-row">
+      <el-button disabled>Default</el-button>
+      <el-button type="primary" disabled>Primary</el-button>
+      <el-button type="success" disabled>Success</el-button>
+      <el-button type="info" disabled>Info</el-button>
+      <el-button type="warning" disabled>Warning</el-button>
+      <el-button type="danger" disabled>Danger</el-button>
+    </div>
 
-  <div>
-    <el-button plain disabled>Plain</el-button>
-    <el-button type="primary" plain disabled>Primary</el-button>
-    <el-button type="success" plain disabled>Success</el-button>
-    <el-button type="info" plain disabled>Info</el-button>
-    <el-button type="warning" plain disabled>Warning</el-button>
-    <el-button type="danger" plain disabled>Danger</el-button>
+    <div class="button-row">
+      <el-button plain disabled>Plain</el-button>
+      <el-button type="primary" plain disabled>Primary</el-button>
+      <el-button type="success" plain disabled>Success</el-button>
+      <el-button type="info" plain disabled>Info</el-button>
+      <el-button type="warning" plain disabled>Warning</el-button>
+      <el-button type="danger" plain disabled>Danger</el-button>
+    </div>
   </div>
 </template>
+
+<style scoped>
+.button-example {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+}
+
+.button-row > * {
+  margin: 0;
+}
+</style>
 
 ```
 
@@ -10815,24 +10938,50 @@ const value = ref()
 ### border.vue
 ```vue
 <template>
-  <div class="text-center">No border:</div>
-  <el-divider />
-  <div class="flex content-center justify-center gap-4">
-    <div class="p-5">
-      <el-date-picker-panel v-model="value" :border="false" />
+  <div
+    ref="containerRef"
+    :class="['date-picker--example', { 'is-narrow': isNarrow }]"
+  >
+    <div class="text-center">No border:</div>
+    <el-divider />
+    <div class="date-picker--flex-container">
+      <div class="p-[20px]">
+        <el-date-picker-panel v-model="value" :border="false" />
+      </div>
+      <el-divider
+        class="divider"
+        :direction="isNarrow ? 'horizontal' : 'vertical'"
+      />
+      <el-card>
+        <el-date-picker-panel v-model="value" :border="false" />
+      </el-card>
     </div>
-    <el-divider class="h-auto" direction="vertical" />
-    <el-card>
-      <el-date-picker-panel v-model="value" :border="false" />
-    </el-card>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
+import { useElementSize } from '@vueuse/core'
 
 const value = ref()
+const containerRef = ref<HTMLElement>()
+
+const { width } = useElementSize(containerRef)
+
+const isNarrow = computed(() => width.value < 815)
 </script>
+
+<style scoped>
+.date-picker--flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+}
+.divider {
+  height: auto;
+}
+</style>
 
 ```
 
@@ -11131,7 +11280,12 @@ const isHoliday = ({ dayjs }) => {
 <style scoped>
 .demo-date-picker {
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.demo-date-picker > * {
+  margin: 0 !important;
 }
 
 .cell {
@@ -11166,6 +11320,12 @@ const isHoliday = ({ dayjs }) => {
   bottom: 0px;
   left: 50%;
   transform: translateX(-50%);
+}
+
+@media screen and (max-width: 768px) {
+  .demo-date-picker {
+    gap: 1.5rem;
+  }
 }
 </style>
 
@@ -11403,41 +11563,64 @@ const value4 = ref('')
   width: 100%;
   padding: 0;
   flex-wrap: wrap;
-}
-
-.demo-date-picker-icon .block {
-  padding: 30px 0;
-  text-align: center;
-  border-right: solid 1px var(--el-border-color);
-  flex: 1;
-}
-
-.demo-date-picker-icon .block:last-child {
-  border-right: none;
+  gap: 1px;
 }
 
 .demo-date-picker-icon .container {
   flex: 1;
+  min-width: 400px;
   border-right: solid 1px var(--el-border-color);
-}
-
-.demo-date-picker-icon .container .block {
-  border-right: none;
-}
-
-.demo-date-picker-icon .container .block:last-child {
-  border-top: solid 1px var(--el-border-color);
+  display: flex;
+  flex-direction: column;
 }
 
 .demo-date-picker-icon .container:last-child {
   border-right: none;
 }
 
+.demo-date-picker-icon .block {
+  padding: 1.5rem 0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.demo-date-picker-icon .block:not(:first-child) {
+  border-top: solid 1px var(--el-border-color);
+}
+
 .demo-date-picker-icon .demonstration {
   display: block;
   color: var(--el-text-color-secondary);
   font-size: 14px;
-  margin-bottom: 20px;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+@media screen and (max-width: 1200px) {
+  .demo-date-picker-icon {
+    gap: 0;
+  }
+
+  .demo-date-picker-icon .container {
+    flex: 0 0 100%;
+    min-width: auto;
+    border-right: none;
+  }
+
+  .demo-date-picker-icon .container:not(:last-child) {
+    border-bottom: solid 1px var(--el-border-color);
+  }
+
+  .demo-date-picker-icon .block {
+    padding: 1rem 0;
+  }
+
+  .demo-date-picker-icon .block:not(:first-child) {
+    position: relative;
+    margin-top: -1px;
+  }
 }
 </style>
 
@@ -11551,20 +11734,58 @@ const value3 = ref('')
   padding: 0;
   flex-wrap: wrap;
 }
+
 .demo-date-picker .block {
-  padding: 30px 0;
+  padding: 1.5rem 0;
   text-align: center;
   border-right: solid 1px var(--el-border-color);
   flex: 1;
+  min-width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
+
 .demo-date-picker .block:last-child {
   border-right: none;
 }
+
 .demo-date-picker .demonstration {
   display: block;
   color: var(--el-text-color-secondary);
   font-size: 14px;
-  margin-bottom: 20px;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+@media screen and (max-width: 1200px) {
+  .demo-date-picker .block {
+    flex: 0 0 50%;
+    border-bottom: solid 1px var(--el-border-color);
+  }
+
+  .demo-date-picker .block:nth-child(2n) {
+    border-right: none;
+  }
+
+  .demo-date-picker .block:nth-last-child(-n + 2):nth-child(2n + 1),
+  .demo-date-picker .block:last-child {
+    border-bottom: none;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .demo-date-picker .block {
+    flex: 0 0 100%;
+    padding: 1rem 0;
+    min-width: auto;
+    border-right: none;
+    border-bottom: solid 1px var(--el-border-color);
+  }
+
+  .demo-date-picker .block:last-child {
+    border-bottom: none;
+  }
 }
 </style>
 
@@ -11573,7 +11794,7 @@ const value3 = ref('')
 ### date-range.vue
 ```vue
 <template>
-  <el-radio-group v-model="size" aria-label="size control">
+  <el-radio-group v-model="size" aria-label="size control" class="mb-4">
     <el-radio-button value="large">large</el-radio-button>
     <el-radio-button value="default">default</el-radio-button>
     <el-radio-button value="small">small</el-radio-button>
@@ -11654,10 +11875,14 @@ const shortcuts = [
 }
 
 .demo-date-picker .block {
-  padding: 30px 0;
+  padding: 1.5rem 0;
   text-align: center;
   border-right: solid 1px var(--el-border-color);
   flex: 1;
+  min-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .demo-date-picker .block:last-child {
@@ -11668,7 +11893,21 @@ const shortcuts = [
   display: block;
   color: var(--el-text-color-secondary);
   font-size: 14px;
-  margin-bottom: 20px;
+  margin-bottom: 1rem;
+}
+
+@media screen and (max-width: 1200px) {
+  .demo-date-picker .block {
+    flex: 0 0 100%;
+    padding: 1rem 0;
+    min-width: auto;
+    border-right: none;
+    border-bottom: solid 1px var(--el-border-color);
+  }
+
+  .demo-date-picker .block:last-child {
+    border-bottom: none;
+  }
 }
 </style>
 
@@ -11762,20 +12001,41 @@ const value2 = ref('')
   padding: 0;
   flex-wrap: wrap;
 }
+
 .demo-date-picker .block {
-  padding: 30px 0;
+  padding: 1.5rem 0;
   text-align: center;
   border-right: solid 1px var(--el-border-color);
   flex: 1;
+  min-width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
+
 .demo-date-picker .block:last-child {
   border-right: none;
 }
+
 .demo-date-picker .demonstration {
   display: block;
   color: var(--el-text-color-secondary);
   font-size: 14px;
-  margin-bottom: 20px;
+  margin-bottom: 1rem;
+}
+
+@media screen and (max-width: 768px) {
+  .demo-date-picker .block {
+    flex: 0 0 100%;
+    padding: 1rem 0;
+    min-width: auto;
+    border-right: none;
+    border-bottom: solid 1px var(--el-border-color);
+  }
+
+  .demo-date-picker .block:last-child {
+    border-bottom: none;
+  }
 }
 </style>
 
@@ -11784,7 +12044,7 @@ const value2 = ref('')
 ### enter-date.vue
 ```vue
 <template>
-  <el-radio-group v-model="size" aria-label="size control">
+  <el-radio-group v-model="size" aria-label="size control" class="mb-4">
     <el-radio-button value="large">large</el-radio-button>
     <el-radio-button value="default">default</el-radio-button>
     <el-radio-button value="small">small</el-radio-button>
@@ -11858,10 +12118,11 @@ const disabledDate = (time: Date) => {
 }
 
 .demo-date-picker .block {
-  padding: 30px 0;
+  padding: 1.5rem 0;
   text-align: center;
   border-right: solid 1px var(--el-border-color);
   flex: 1;
+  min-width: 300px;
 }
 
 .demo-date-picker .block:last-child {
@@ -11872,7 +12133,21 @@ const disabledDate = (time: Date) => {
   display: block;
   color: var(--el-text-color-secondary);
   font-size: 14px;
-  margin-bottom: 20px;
+  margin-bottom: 1rem;
+}
+
+@media screen and (max-width: 768px) {
+  .demo-date-picker .block {
+    flex: 0 0 100%;
+    padding: 1rem 0;
+    min-width: auto;
+    border-right: none;
+    border-bottom: solid 1px var(--el-border-color);
+  }
+
+  .demo-date-picker .block:last-child {
+    border-bottom: none;
+  }
 }
 </style>
 
@@ -11945,20 +12220,38 @@ const shortcuts = [
   padding: 0;
   flex-wrap: wrap;
 }
+
 .demo-date-picker .block {
-  padding: 30px 0;
+  padding: 1.5rem 0;
   text-align: center;
   border-right: solid 1px var(--el-border-color);
   flex: 1;
+  min-width: 300px;
 }
+
 .demo-date-picker .block:last-child {
   border-right: none;
 }
+
 .demo-date-picker .demonstration {
   display: block;
   color: var(--el-text-color-secondary);
   font-size: 14px;
-  margin-bottom: 20px;
+  margin-bottom: 1rem;
+}
+
+@media screen and (max-width: 768px) {
+  .demo-date-picker .block {
+    flex: 0 0 100%;
+    padding: 1rem 0;
+    min-width: auto;
+    border-right: none;
+    border-bottom: solid 1px var(--el-border-color);
+  }
+
+  .demo-date-picker .block:last-child {
+    border-bottom: none;
+  }
 }
 </style>
 
@@ -12045,39 +12338,51 @@ const value6 = ref('')
   flex-wrap: wrap;
 }
 
-.demo-date-picker .block {
-  padding: 30px 0;
-  text-align: center;
-  border-right: solid 1px var(--el-border-color);
-  flex: 1;
-}
-
-.demo-date-picker .block:last-child {
-  border-right: none;
-}
-
 .demo-date-picker .container {
   flex: 1;
+  min-width: 300px;
   border-right: solid 1px var(--el-border-color);
-}
-
-.demo-date-picker .container .block {
-  border-right: none;
-}
-
-.demo-date-picker .container .block:last-child {
-  border-top: solid 1px var(--el-border-color);
 }
 
 .demo-date-picker .container:last-child {
   border-right: none;
 }
 
+.demo-date-picker .block {
+  padding: 1.5rem 0;
+  text-align: center;
+}
+
+.demo-date-picker .container .block:last-child {
+  border-top: solid 1px var(--el-border-color);
+}
+
 .demo-date-picker .demonstration {
   display: block;
   color: var(--el-text-color-secondary);
   font-size: 14px;
-  margin-bottom: 20px;
+  margin-bottom: 1rem;
+}
+
+@media screen and (max-width: 768px) {
+  .demo-date-picker .container {
+    flex: 0 0 100%;
+    min-width: auto;
+    border-right: none;
+    border-bottom: solid 1px var(--el-border-color);
+  }
+
+  .demo-date-picker .container:last-child {
+    border-bottom: none;
+  }
+
+  .demo-date-picker .block {
+    padding: 1rem 0;
+  }
+
+  .demo-date-picker .container .block:last-child {
+    border-top: solid 1px var(--el-border-color);
+  }
 }
 </style>
 
@@ -12153,20 +12458,38 @@ const shortcuts = [
   padding: 0;
   flex-wrap: wrap;
 }
+
 .demo-date-picker .block {
-  padding: 30px 0;
+  padding: 1.5rem 0;
   text-align: center;
   border-right: solid 1px var(--el-border-color);
   flex: 1;
+  min-width: 300px;
 }
+
 .demo-date-picker .block:last-child {
   border-right: none;
 }
+
 .demo-date-picker .demonstration {
   display: block;
   color: var(--el-text-color-secondary);
   font-size: 14px;
-  margin-bottom: 20px;
+  margin-bottom: 1rem;
+}
+
+@media screen and (max-width: 768px) {
+  .demo-date-picker .block {
+    flex: 0 0 100%;
+    padding: 1rem 0;
+    min-width: auto;
+    border-right: none;
+    border-bottom: solid 1px var(--el-border-color);
+  }
+
+  .demo-date-picker .block:last-child {
+    border-bottom: none;
+  }
 }
 </style>
 
@@ -12426,10 +12749,36 @@ const value2 = ref('')
 .demo-datetime-picker-icon .block {
   padding: 30px 0;
   text-align: center;
+  min-width: 300px;
+  flex: 1;
 }
 .line {
   width: 1px;
   background-color: var(--el-border-color);
+}
+
+@media (max-width: 768px) {
+  .demo-datetime-picker-icon .block {
+    flex: 100%;
+    border-bottom: solid 1px var(--el-border-color);
+  }
+
+  .demo-datetime-picker-icon .block:last-child {
+    border-bottom: none;
+  }
+
+  .line {
+    display: none;
+  }
+
+  :deep(.el-date-editor.el-input) {
+    width: 100%;
+  }
+
+  :deep(.el-date-editor.el-input__wrapper) {
+    width: 100%;
+    max-width: 300px;
+  }
 }
 </style>
 
@@ -12483,10 +12832,36 @@ const value2 = ref('')
 .demo-datetime-picker .block {
   padding: 30px 0;
   text-align: center;
+  min-width: 300px;
+  flex: 1;
 }
 .line {
   width: 1px;
   background-color: var(--el-border-color);
+}
+
+@media (max-width: 768px) {
+  .demo-datetime-picker .block {
+    flex: 100%;
+    border-bottom: solid 1px var(--el-border-color);
+  }
+
+  .demo-datetime-picker .block:last-child {
+    border-bottom: none;
+  }
+
+  .line {
+    display: none;
+  }
+
+  :deep(.el-date-editor.el-input) {
+    width: 100%;
+  }
+
+  :deep(.el-date-editor.el-input__wrapper) {
+    width: 100%;
+    max-width: 300px;
+  }
 }
 </style>
 
@@ -12551,6 +12926,7 @@ const value3 = ref('')
   text-align: center;
   border-right: solid 1px var(--el-border-color);
   flex: 1;
+  min-width: 300px;
 }
 .demo-datetime-picker .block:last-child {
   border-right: none;
@@ -12561,6 +12937,27 @@ const value3 = ref('')
   font-size: 14px;
   margin-bottom: 20px;
 }
+
+@media (max-width: 768px) {
+  .demo-datetime-picker .block {
+    flex: 100%;
+    border-right: none;
+    border-bottom: solid 1px var(--el-border-color);
+  }
+
+  .demo-datetime-picker .block:last-child {
+    border-bottom: none;
+  }
+
+  :deep(.el-date-editor.el-input) {
+    width: 100%;
+  }
+
+  :deep(.el-date-editor.el-input__wrapper) {
+    width: 100%;
+    max-width: 300px;
+  }
+}
 </style>
 
 ```
@@ -12568,26 +12965,28 @@ const value3 = ref('')
 ### date-and-time-range.vue
 ```vue
 <template>
-  <div class="block">
-    <span class="demonstration">Default</span>
-    <el-date-picker
-      v-model="value1"
-      type="datetimerange"
-      range-separator="To"
-      start-placeholder="Start date"
-      end-placeholder="End date"
-    />
-  </div>
-  <div class="block">
-    <span class="demonstration">With shortcuts</span>
-    <el-date-picker
-      v-model="value2"
-      type="datetimerange"
-      :shortcuts="shortcuts"
-      range-separator="To"
-      start-placeholder="Start date"
-      end-placeholder="End date"
-    />
+  <div class="demo-datetime-picker">
+    <div class="block">
+      <span class="demonstration">Default</span>
+      <el-date-picker
+        v-model="value1"
+        type="datetimerange"
+        range-separator="To"
+        start-placeholder="Start date"
+        end-placeholder="End date"
+      />
+    </div>
+    <div class="block">
+      <span class="demonstration">With shortcuts</span>
+      <el-date-picker
+        v-model="value2"
+        type="datetimerange"
+        :shortcuts="shortcuts"
+        range-separator="To"
+        start-placeholder="Start date"
+        end-placeholder="End date"
+      />
+    </div>
   </div>
 </template>
 
@@ -12632,20 +13031,51 @@ const shortcuts = [
 </script>
 
 <style scoped>
+.demo-datetime-picker {
+  display: flex;
+  width: 100%;
+  padding: 0;
+  flex-wrap: wrap;
+}
+
 .block {
   padding: 30px 0;
   text-align: center;
   border-right: solid 1px var(--el-border-color);
   flex: 1;
+  min-width: 300px;
 }
+
 .block:last-child {
   border-right: none;
 }
+
 .block .demonstration {
   display: block;
   color: var(--el-text-color-secondary);
   font-size: 14px;
   margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+  .block {
+    flex: 100%;
+    border-right: none;
+    border-bottom: solid 1px var(--el-border-color);
+  }
+
+  .block:last-child {
+    border-bottom: none;
+  }
+
+  :deep(.el-date-editor.el-input) {
+    width: 100%;
+  }
+
+  :deep(.el-date-editor.el-input__wrapper) {
+    width: 100%;
+    max-width: 300px;
+  }
 }
 </style>
 
@@ -12728,6 +13158,7 @@ const shortcuts = [
   text-align: center;
   border-right: solid 1px var(--el-border-color);
   flex: 1;
+  min-width: 300px;
 }
 .demo-datetime-picker .block:last-child {
   border-right: none;
@@ -12738,6 +13169,27 @@ const shortcuts = [
   font-size: 14px;
   margin-bottom: 20px;
 }
+
+@media (max-width: 768px) {
+  .demo-datetime-picker .block {
+    flex: 100%;
+    border-right: none;
+    border-bottom: solid 1px var(--el-border-color);
+  }
+
+  .demo-datetime-picker .block:last-child {
+    border-bottom: none;
+  }
+
+  :deep(.el-date-editor.el-input) {
+    width: 100%;
+  }
+
+  :deep(.el-date-editor.el-input__wrapper) {
+    width: 100%;
+    max-width: 300px;
+  }
+}
 </style>
 
 ```
@@ -12745,27 +13197,29 @@ const shortcuts = [
 ### default-time.vue
 ```vue
 <template>
-  <div class="block">
-    <span class="demonstration">Start and end date time 12:00:00</span>
-    <el-date-picker
-      v-model="value1"
-      type="datetimerange"
-      start-placeholder="Start Date"
-      end-placeholder="End Date"
-      :default-time="defaultTime1"
-    />
-  </div>
-  <div class="block">
-    <span class="demonstration">
-      Start date time 12:00:00, end date time 08:00:00
-    </span>
-    <el-date-picker
-      v-model="value2"
-      type="datetimerange"
-      start-placeholder="Start Date"
-      end-placeholder="End Date"
-      :default-time="defaultTime2"
-    />
+  <div class="demo-datetime-picker">
+    <div class="block">
+      <span class="demonstration">Start and end date time 12:00:00</span>
+      <el-date-picker
+        v-model="value1"
+        type="datetimerange"
+        start-placeholder="Start Date"
+        end-placeholder="End Date"
+        :default-time="defaultTime1"
+      />
+    </div>
+    <div class="block">
+      <span class="demonstration">
+        Start date time 12:00:00, end date time 08:00:00
+      </span>
+      <el-date-picker
+        v-model="value2"
+        type="datetimerange"
+        start-placeholder="Start Date"
+        end-placeholder="End Date"
+        :default-time="defaultTime2"
+      />
+    </div>
   </div>
 </template>
 
@@ -12783,20 +13237,51 @@ const defaultTime2: [Date, Date] = [
 </script>
 
 <style scoped>
+.demo-datetime-picker {
+  display: flex;
+  width: 100%;
+  padding: 0;
+  flex-wrap: wrap;
+}
+
 .block {
   padding: 30px 0;
   text-align: center;
   border-right: solid 1px var(--el-border-color);
   flex: 1;
+  min-width: 300px;
 }
+
 .block:last-child {
   border-right: none;
 }
+
 .block .demonstration {
   display: block;
   color: var(--el-text-color-secondary);
   font-size: 14px;
   margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+  .block {
+    flex: 100%;
+    border-right: none;
+    border-bottom: solid 1px var(--el-border-color);
+  }
+
+  .block:last-child {
+    border-bottom: none;
+  }
+
+  :deep(.el-date-editor.el-input) {
+    width: 100%;
+  }
+
+  :deep(.el-date-editor.el-input__wrapper) {
+    width: 100%;
+    max-width: 300px;
+  }
 }
 </style>
 
@@ -13672,13 +14157,15 @@ code {
 ### customization-content.vue
 ```vue
 <template>
-  <el-button plain @click="dialogTableVisible = true">
-    Open a Table nested Dialog
-  </el-button>
+  <div class="flex flex-wrap gap-1">
+    <el-button class="!ml-0" plain @click="dialogTableVisible = true">
+      Open a Table nested Dialog
+    </el-button>
 
-  <el-button plain @click="dialogFormVisible = true">
-    Open a Form nested Dialog
-  </el-button>
+    <el-button class="!ml-0" plain @click="dialogFormVisible = true">
+      Open a Form nested Dialog
+    </el-button>
+  </div>
 
   <el-dialog v-model="dialogTableVisible" title="Shipping address" width="800">
     <el-table :data="gridData">
@@ -16818,6 +17305,7 @@ const url =
   border-right: solid 1px var(--el-border-color);
   display: inline-block;
   width: 20%;
+  min-width: 100px;
   box-sizing: border-box;
   vertical-align: top;
 }
@@ -17484,30 +17972,31 @@ const handleChange = (value: number | undefined) => {
 ### controlled.vue
 ```vue
 <template>
-  <el-input-number
-    v-model="num"
-    :min="1"
-    :max="10"
-    controls-position="right"
-    size="large"
-    @change="handleChange"
-  />
-  <el-input-number
-    v-model="num"
-    class="mx-4"
-    :min="1"
-    :max="10"
-    controls-position="right"
-    @change="handleChange"
-  />
-  <el-input-number
-    v-model="num"
-    :min="1"
-    :max="10"
-    size="small"
-    controls-position="right"
-    @change="handleChange"
-  />
+  <div class="flex flex-wrap items-center gap-4">
+    <el-input-number
+      v-model="num"
+      :min="1"
+      :max="10"
+      controls-position="right"
+      size="large"
+      @change="handleChange"
+    />
+    <el-input-number
+      v-model="num"
+      :min="1"
+      :max="10"
+      controls-position="right"
+      @change="handleChange"
+    />
+    <el-input-number
+      v-model="num"
+      :min="1"
+      :max="10"
+      size="small"
+      controls-position="right"
+      @change="handleChange"
+    />
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -17598,9 +18087,11 @@ const num = ref(1)
 ### size.vue
 ```vue
 <template>
-  <el-input-number v-model="num1" size="large" />
-  <el-input-number v-model="num2" class="mx-4" />
-  <el-input-number v-model="num3" size="small" />
+  <div class="flex flex-wrap items-center gap-4">
+    <el-input-number v-model="num1" size="large" />
+    <el-input-number v-model="num2" />
+    <el-input-number v-model="num3" size="small" />
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -18535,37 +19026,47 @@ const input3 = ref('')
 ### with-icon.vue
 ```vue
 <template>
-  <div class="flex gap-4 mb-4">
-    <span>Using attributes</span>
-    <el-input
-      v-model="input1"
-      style="width: 240px"
-      placeholder="Pick a date"
-      :suffix-icon="Calendar"
-    />
-    <el-input
-      v-model="input2"
-      style="width: 240px"
-      placeholder="Type something"
-      :prefix-icon="Search"
-    />
-  </div>
-  <div class="flex gap-4">
-    <span>Using slots</span>
-    <el-input v-model="input3" style="width: 240px" placeholder="Pick a date">
-      <template #suffix>
-        <el-icon class="el-input__icon"><calendar /></el-icon>
-      </template>
-    </el-input>
-    <el-input
-      v-model="input4"
-      style="width: 240px"
-      placeholder="Type something"
-    >
-      <template #prefix>
-        <el-icon class="el-input__icon"><search /></el-icon>
-      </template>
-    </el-input>
+  <div class="demo-input-with-icon">
+    <div class="input-group">
+      <span class="label">Using attributes</span>
+      <div class="input-container">
+        <el-input
+          v-model="input1"
+          class="responsive-input"
+          placeholder="Pick a date"
+          :suffix-icon="Calendar"
+        />
+        <el-input
+          v-model="input2"
+          class="responsive-input"
+          placeholder="Type something"
+          :prefix-icon="Search"
+        />
+      </div>
+    </div>
+    <div class="input-group">
+      <span class="label">Using slots</span>
+      <div class="input-container">
+        <el-input
+          v-model="input3"
+          class="responsive-input"
+          placeholder="Pick a date"
+        >
+          <template #suffix>
+            <el-icon class="el-input__icon"><calendar /></el-icon>
+          </template>
+        </el-input>
+        <el-input
+          v-model="input4"
+          class="responsive-input"
+          placeholder="Type something"
+        >
+          <template #prefix>
+            <el-icon class="el-input__icon"><search /></el-icon>
+          </template>
+        </el-input>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -18578,6 +19079,43 @@ const input2 = ref('')
 const input3 = ref('')
 const input4 = ref('')
 </script>
+
+<style scoped>
+.demo-input-with-icon {
+  width: 100%;
+}
+
+.input-group {
+  margin-bottom: 1.5rem;
+}
+
+.label {
+  display: block;
+  margin-bottom: 1rem;
+  color: var(--el-text-color-regular);
+}
+
+.input-container {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.responsive-input {
+  width: 240px;
+}
+
+@media (max-width: 768px) {
+  .input-container {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .responsive-input {
+    width: 100%;
+  }
+}
+</style>
 
 ```
 
@@ -20939,8 +21477,10 @@ const open = () => {
 ### use-vnode.vue
 ```vue
 <template>
-  <el-button plain @click="open">Common VNode</el-button>
-  <el-button plain @click="open1">Dynamic props</el-button>
+  <div class="flex flex-wrap gap-1">
+    <el-button class="!ml-0" plain @click="open">Common VNode</el-button>
+    <el-button class="!ml-0" plain @click="open1">Dynamic props</el-button>
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -21092,8 +21632,12 @@ ElMessage({}, appContext)
 ### basic.vue
 ```vue
 <template>
-  <el-button :plain="true" @click="open">Show message</el-button>
-  <el-button :plain="true" @click="openVn">VNode</el-button>
+  <div class="flex flex-wrap gap-1">
+    <el-button class="!ml-0" :plain="true" @click="open">
+      Show message
+    </el-button>
+    <el-button class="!ml-0" :plain="true" @click="openVn">VNode</el-button>
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -21119,12 +21663,16 @@ const openVn = () => {
 ### closable.vue
 ```vue
 <template>
-  <el-button :plain="true" @click="open6">Primary</el-button>
-  <el-button :plain="true" @click="open2">Success</el-button>
-  <el-button :plain="true" @click="open3">Warning</el-button>
-  <el-button :plain="true" @click="open1">Info</el-button>
-  <el-button :plain="true" @click="open4">Error</el-button>
-  <el-button :plain="true" @click="open5">Won't close automatically</el-button>
+  <div class="flex flex-wrap gap-1">
+    <el-button class="!ml-0" :plain="true" @click="open6">Primary</el-button>
+    <el-button class="!ml-0" :plain="true" @click="open2">Success</el-button>
+    <el-button class="!ml-0" :plain="true" @click="open3">Warning</el-button>
+    <el-button class="!ml-0" :plain="true" @click="open1">Info</el-button>
+    <el-button class="!ml-0" :plain="true" @click="open4">Error</el-button>
+    <el-button class="!ml-0" :plain="true" @click="open5">
+      Won't close automatically
+    </el-button>
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -21178,11 +21726,13 @@ const open6 = () => {
 ### different-types.vue
 ```vue
 <template>
-  <el-button :plain="true" @click="open5">Primary</el-button>
-  <el-button :plain="true" @click="open2">Success</el-button>
-  <el-button :plain="true" @click="open3">Warning</el-button>
-  <el-button :plain="true" @click="open1">Info</el-button>
-  <el-button :plain="true" @click="open4">Error</el-button>
+  <div class="flex flex-wrap gap-1">
+    <el-button class="!ml-0" :plain="true" @click="open5">Primary</el-button>
+    <el-button class="!ml-0" :plain="true" @click="open2">Success</el-button>
+    <el-button class="!ml-0" :plain="true" @click="open3">Warning</el-button>
+    <el-button class="!ml-0" :plain="true" @click="open1">Info</el-button>
+    <el-button class="!ml-0" :plain="true" @click="open4">Error</el-button>
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -21312,11 +21862,13 @@ const openMsg = (placement: MessagePlacement = 'top') => {
 ### plain.vue
 ```vue
 <template>
-  <el-button :plain="true" @click="open5">Primary</el-button>
-  <el-button :plain="true" @click="open1">Success</el-button>
-  <el-button :plain="true" @click="open2">Warning</el-button>
-  <el-button :plain="true" @click="open3">Info</el-button>
-  <el-button :plain="true" @click="open4">Error</el-button>
+  <div class="flex flex-wrap gap-1">
+    <el-button class="!ml-0" :plain="true" @click="open5">Primary</el-button>
+    <el-button class="!ml-0" :plain="true" @click="open1">Success</el-button>
+    <el-button class="!ml-0" :plain="true" @click="open2">Warning</el-button>
+    <el-button class="!ml-0" :plain="true" @click="open3">Info</el-button>
+    <el-button class="!ml-0" :plain="true" @click="open4">Error</el-button>
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -21505,8 +22057,14 @@ ElNotification({}, appContext)
 ### basic.vue
 ```vue
 <template>
-  <el-button plain @click="open1"> Closes automatically </el-button>
-  <el-button plain @click="open2"> Won't close automatically </el-button>
+  <div class="flex flex-wrap gap-1">
+    <el-button class="!ml-0" plain @click="open1">
+      Closes automatically
+    </el-button>
+    <el-button class="!ml-0" plain @click="open2">
+      Won't close automatically
+    </el-button>
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -21534,11 +22092,13 @@ const open2 = () => {
 ### different-types.vue
 ```vue
 <template>
-  <el-button plain @click="open5">Primary</el-button>
-  <el-button plain @click="open1">Success</el-button>
-  <el-button plain @click="open2">Warning</el-button>
-  <el-button plain @click="open3">Info</el-button>
-  <el-button plain @click="open4">Error</el-button>
+  <div class="flex flex-wrap gap-1">
+    <el-button class="!ml-0" plain @click="open5">Primary</el-button>
+    <el-button class="!ml-0" plain @click="open1">Success</el-button>
+    <el-button class="!ml-0" plain @click="open2">Warning</el-button>
+    <el-button class="!ml-0" plain @click="open3">Info</el-button>
+    <el-button class="!ml-0" plain @click="open4">Error</el-button>
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -21630,10 +22190,12 @@ const open = () => {
 ### positioning.vue
 ```vue
 <template>
-  <el-button plain @click="open1"> Top Right </el-button>
-  <el-button plain @click="open2"> Bottom Right </el-button>
-  <el-button plain @click="open3"> Bottom Left </el-button>
-  <el-button plain @click="open4"> Top Left </el-button>
+  <div class="flex flex-wrap gap-1">
+    <el-button class="!ml-0" plain @click="open1"> Top Right </el-button>
+    <el-button class="!ml-0" plain @click="open2"> Bottom Right </el-button>
+    <el-button class="!ml-0" plain @click="open3"> Bottom Left </el-button>
+    <el-button class="!ml-0" plain @click="open4"> Top Left </el-button>
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -21696,8 +22258,10 @@ const open = () => {
 ### use-vnode.vue
 ```vue
 <template>
-  <el-button plain @click="open">Common VNode</el-button>
-  <el-button plain @click="open1">Dynamic props</el-button>
+  <div class="flex flex-wrap gap-1">
+    <el-button class="!ml-0" plain @click="open">Common VNode</el-button>
+    <el-button class="!ml-0" plain @click="open1">Dynamic props</el-button>
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -29797,11 +30361,11 @@ Display statistics.
 ### basic.vue
 ```vue
 <template>
-  <el-row>
-    <el-col :span="6">
+  <el-row :gutter="16">
+    <el-col :xs="24" :sm="12" :md="6" class="text-center mb-4">
       <el-statistic title="Daily active users" :value="268500" />
     </el-col>
-    <el-col :span="6">
+    <el-col :xs="24" :sm="12" :md="6" class="text-center mb-4">
       <el-statistic :value="138">
         <template #title>
           <div style="display: inline-flex; align-items: center">
@@ -29814,10 +30378,10 @@ Display statistics.
         <template #suffix>/100</template>
       </el-statistic>
     </el-col>
-    <el-col :span="6">
+    <el-col :xs="24" :sm="12" :md="6" class="text-center mb-4">
       <el-statistic title="Total Transactions" :value="outputValue" />
     </el-col>
-    <el-col :span="6">
+    <el-col :xs="24" :sm="12" :md="6" class="text-center mb-4">
       <el-statistic title="Feedback number" :value="562">
         <template #suffix>
           <el-icon style="vertical-align: -0.125em">
@@ -29841,19 +30405,13 @@ const outputValue = useTransition(source, {
 source.value = 172000
 </script>
 
-<style scoped>
-.el-col {
-  text-align: center;
-}
-</style>
-
 ```
 
 ### card.vue
 ```vue
 <template>
   <el-row :gutter="16">
-    <el-col :span="8">
+    <el-col :xs="24" :sm="12" :md="8" class="mb-4">
       <div class="statistic-card">
         <el-statistic :value="98500">
           <template #title>
@@ -29884,7 +30442,7 @@ source.value = 172000
         </div>
       </div>
     </el-col>
-    <el-col :span="8">
+    <el-col :xs="24" :sm="12" :md="8" class="mb-4">
       <div class="statistic-card">
         <el-statistic :value="693700">
           <template #title>
@@ -29915,7 +30473,7 @@ source.value = 172000
         </div>
       </div>
     </el-col>
-    <el-col :span="8">
+    <el-col :xs="24" :sm="12" :md="8" class="mb-4">
       <div class="statistic-card">
         <el-statistic :value="72000" title="New transactions today">
           <template #title>
@@ -30005,11 +30563,11 @@ import {
 ### countdown.vue
 ```vue
 <template>
-  <el-row>
-    <el-col :span="8">
+  <el-row :gutter="16">
+    <el-col :xs="24" :sm="12" :md="8" class="text-center mb-4">
       <el-countdown title="Start to grab" :value="value" />
     </el-col>
-    <el-col :span="8">
+    <el-col :xs="24" :sm="12" :md="8" class="text-center mb-4">
       <el-countdown
         title="Remaining VIP time"
         format="HH:mm:ss"
@@ -30019,7 +30577,7 @@ import {
         Reset
       </el-button>
     </el-col>
-    <el-col :span="8">
+    <el-col :xs="24" :sm="12" :md="8" class="text-center mb-4">
       <el-countdown format="DD [days] HH:mm:ss" :value="value2">
         <template #title>
           <div style="display: inline-flex; align-items: center">
@@ -30050,10 +30608,6 @@ function reset() {
 </script>
 
 <style scoped>
-.el-col {
-  text-align: center;
-}
-
 .countdown-footer {
   margin-top: 8px;
 }
@@ -37026,12 +37580,11 @@ const value = ref('')
 ### time-range.vue
 ```vue
 <template>
-  <div class="demo-time-range">
+  <div class="demo-time-range flex flex-wrap gap-4">
     <el-time-select
       v-model="startTime"
       style="width: 240px"
       :max-time="endTime"
-      class="mr-4"
       placeholder="Start time"
       start="08:30"
       step="00:15"
@@ -37700,6 +38253,7 @@ onMounted(() => {
 <style scoped>
 .target {
   position: relative;
+  margin-top: 20px;
 }
 </style>
 
@@ -40728,12 +41282,12 @@ const defaultProps = {
     :props="defaultProps"
   />
 
-  <div class="mt-2">
-    <el-button @click="getCheckedNodes">get by node</el-button>
-    <el-button @click="getCheckedKeys">get by key</el-button>
-    <el-button @click="setCheckedNodes">set by node</el-button>
-    <el-button @click="setCheckedKeys">set by key</el-button>
-    <el-button @click="resetChecked">reset</el-button>
+  <div class="flex flex-wrap gap-1 mt-2">
+    <el-button class="!ml-0" @click="getCheckedNodes">get by node</el-button>
+    <el-button class="!ml-0" @click="getCheckedKeys">get by key</el-button>
+    <el-button class="!ml-0" @click="setCheckedNodes">set by node</el-button>
+    <el-button class="!ml-0" @click="setCheckedKeys">set by key</el-button>
+    <el-button class="!ml-0" @click="resetChecked">reset</el-button>
   </div>
 </template>
 
