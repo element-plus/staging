@@ -8026,6 +8026,187 @@ const beforeCollapse = (): Promise<boolean> => {
 
 
 ---
+Title: ColorPickerPanel
+URL: https://element-plus.org/en-US/component/color-picker-panel
+---
+
+# ColorPickerPanel ^(beta)
+
+`ColorPickerPanel` is the core component of `ColorPicker`.
+
+## Basic usage
+
+
+
+## Alpha
+
+
+
+## Predefined colors
+
+
+
+## Border
+
+By default the color-picker-panel is bordered but in some case you don't want it.
+
+
+
+## Disabled
+
+The `disabled` attribute determines if the color picker is fully disabled.
+
+
+
+## API
+
+### Attributes
+
+| Name                  | Description                          | Type                                                                                                             | Default |
+| --------------------- | ------------------------------------ | ---------------------------------------------------------------------------------------------------------------- | ------- |
+| model-value / v-model | binding value                        | ^[string]                                                                                                        | —       |
+| border                | whether the color picker is bordered | ^[boolean]                                                                                                       | true    |
+| disabled              | whether to disable the color picker  | ^[boolean]                                                                                                       | false   |
+| show-alpha            | whether to display the alpha slider  | ^[boolean]                                                                                                       | false   |
+| color-format          | color format of v-model              | ^[enum]`'hsl' \| 'hsv' \| 'hex' \| 'rgb' \| 'hex' (when show-alpha is false) \| 'rgb' (when show-alpha is true)` | —       |
+| predefine             | predefined color options             | ^[object]`string[]`                                                                                              | —       |
+
+### Exposes
+
+| Name     | Description          | Type                     |
+| -------- | -------------------- | ------------------------ |
+| color    | current color object | ^[object]`Color`         |
+| inputRef | custom input ref     | ^[object]`InputInstance` |
+
+## Vue Examples
+
+### alpha.vue
+```vue
+<template>
+  <el-color-picker-panel v-model="color" show-alpha />
+</template>
+
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const color = ref('rgba(19, 206, 102, 0.8)')
+</script>
+
+```
+
+### basic.vue
+```vue
+<template>
+  <el-color-picker-panel v-model="color" />
+</template>
+
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const color = ref('#409EFF')
+</script>
+
+```
+
+### border.vue
+```vue
+<template>
+  <div ref="containerRef">
+    <div class="text-center">No border:</div>
+    <el-divider />
+    <div class="flex flex-wrap justify-center gap-4">
+      <div class="p-5">
+        <el-color-picker-panel v-model="value" :border="false" />
+      </div>
+      <el-divider
+        class="h-auto"
+        :direction="isNarrow ? 'horizontal' : 'vertical'"
+      />
+      <el-card>
+        <el-color-picker-panel v-model="value" :border="false" />
+      </el-card>
+    </div>
+  </div>
+</template>
+
+<script lang="ts" setup>
+import { computed, ref } from 'vue'
+import { useElementSize } from '@vueuse/core'
+
+const value = ref('#ff6900')
+const containerRef = ref<HTMLElement>()
+
+const { width } = useElementSize(containerRef)
+
+const isNarrow = computed(() => width.value < 815)
+</script>
+
+```
+
+### disabled.vue
+```vue
+<template>
+  <el-color-picker-panel
+    v-model="color"
+    disabled
+    show-alpha
+    :predefine="predefineColors"
+  />
+</template>
+
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const color = ref('#ff6900')
+const predefineColors = [
+  '#ff4500',
+  '#ff8c00',
+  '#ffd700',
+  '#90ee90',
+  '#00ced1',
+  '#1e90ff',
+  '#c71585',
+]
+</script>
+
+```
+
+### predefined-color.vue
+```vue
+<template>
+  <el-color-picker-panel
+    v-model="color"
+    show-alpha
+    :predefine="predefineColors"
+  />
+</template>
+
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const color = ref('rgba(255, 69, 0, 0.68)')
+const predefineColors = [
+  '#ff4500',
+  '#ff8c00',
+  '#ffd700',
+  '#90ee90',
+  '#00ced1',
+  '#1e90ff',
+  '#c71585',
+  'rgba(255, 69, 0, 0.68)',
+  'rgb(255, 120, 0)',
+  'hsv(51, 100, 98)',
+  'hsva(120, 40, 94, 0.5)',
+  'hsl(181, 100%, 37%)',
+  'hsla(209, 100%, 56%, 0.73)',
+  '#c7158577',
+]
+</script>
+
+```
+
+
+---
 Title: ColorPicker
 URL: https://element-plus.org/en-US/component/color-picker
 ---
@@ -8185,7 +8366,7 @@ const predefineColors = ref([
 <script lang="ts" setup>
 import { ref } from 'vue'
 
-const color = ref('409EFF')
+const color = ref('#409EFF')
 </script>
 
 <style>

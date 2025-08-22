@@ -20,6 +20,7 @@
 - [Cascader](https://element-plus.org/en-US/component/cascader)
 - [Checkbox](https://element-plus.org/en-US/component/checkbox)
 - [Collapse](https://element-plus.org/en-US/component/collapse)
+- [ColorPickerPanel](https://element-plus.org/en-US/component/color-picker-panel)
 - [ColorPicker](https://element-plus.org/en-US/component/color-picker)
 - [Color](https://element-plus.org/en-US/component/color)
 - [Config Provider](https://element-plus.org/en-US/component/config-provider)
