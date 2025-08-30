@@ -8756,6 +8756,10 @@ It is used for multiple checkboxes which are bound in one group, and indicates w
 
 
 
+## Options attribute ^(2.11.2)
+
+
+
 ## Indeterminate
 
 The `indeterminate` property can help you to achieve a 'check all' effect.
@@ -8819,19 +8823,21 @@ Checkbox with button styles.
 
 ### CheckboxGroup Attributes
 
-| Name                        | Description                                       | Type                                     | Default |
-| --------------------------- | ------------------------------------------------- | ---------------------------------------- | ------- |
-| model-value / v-model       | binding value                                     | ^[object]`string[] \| number[]`          | []      |
-| size                        | size of checkbox                                  | ^[enum]`'large' \| 'default' \| 'small'` | —       |
-| disabled                    | whether the nesting checkboxes are disabled       | ^[boolean]                               | false   |
-| min                         | minimum number of checkbox checked                | ^[number]                                | —       |
-| max                         | maximum number of checkbox checked                | ^[number]                                | —       |
-| aria-label ^(a11y) ^(2.7.2) | native `aria-label` attribute                     | ^[string]                                | —       |
-| text-color                  | font color when button is active                  | ^[string]                                | #ffffff |
-| fill                        | border and background color when button is active | ^[string]                                | #409eff |
-| tag                         | element tag of the checkbox group                 | ^[string]                                | div     |
-| validate-event              | whether to trigger form validation                | ^[boolean]                               | true    |
-| label ^(a11y) ^(deprecated) | native `aria-label` attribute                     | ^[string]                                | —       |
+| Name                        | Description                                                                                    | Type                                                             | Default                                                  |
+| --------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- | -------------------------------------------------------- |
+| model-value / v-model       | binding value                                                                                  | ^[object]`string[] \| number[]`                                  | []                                                       |
+| size                        | size of checkbox                                                                               | ^[enum]`'large' \| 'default' \| 'small'`                         | —                                                        |
+| disabled                    | whether the nesting checkboxes are disabled                                                    | ^[boolean]                                                       | false                                                    |
+| min                         | minimum number of checkbox checked                                                             | ^[number]                                                        | —                                                        |
+| max                         | maximum number of checkbox checked                                                             | ^[number]                                                        | —                                                        |
+| aria-label ^(a11y) ^(2.7.2) | native `aria-label` attribute                                                                  | ^[string]                                                        | —                                                        |
+| text-color                  | font color when button is active                                                               | ^[string]                                                        | #ffffff                                                  |
+| fill                        | border and background color when button is active                                              | ^[string]                                                        | #409eff                                                  |
+| tag                         | element tag of the checkbox group                                                              | ^[string]                                                        | div                                                      |
+| validate-event              | whether to trigger form validation                                                             | ^[boolean]                                                       | true                                                     |
+| label ^(a11y) ^(deprecated) | native `aria-label` attribute                                                                  | ^[string]                                                        | —                                                        |
+| options ^(2.11.2)           | data of the options, the key of `value` and `label` and `disabled` can be customize by `props` | ^[array]`Array<{[key: string]: any}>`                            | —                                                        |
+| props ^(2.11.2)             | configuration options                                                                          | ^[object]`{ value?: string, label?: string, disabled?: boolean}` | `{value: 'value', label: 'label', disabled: 'disabled'}` |
 
 ### CheckboxGroup Events
 
@@ -9053,6 +9059,31 @@ import { ref } from 'vue'
 
 const checkedCities = ref(['Shanghai', 'Beijing'])
 const cities = ['Shanghai', 'Beijing', 'Guangzhou', 'Shenzhen']
+</script>
+
+```
+
+### options.vue
+```vue
+<template>
+  <el-checkbox-group v-model="checkList" :options="options" />
+</template>
+
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const checkList = ref(['Value selected and disabled', 'Value A'])
+const options = [
+  { label: 'Option A', value: 'Value A' },
+  { label: 'Option B', value: 'Value B' },
+  { label: 'Option C', value: 'Value C' },
+  { label: 'disabled', value: 'Value disabled', disabled: true },
+  {
+    label: 'selected and disabled',
+    value: 'Value selected and disabled',
+    disabled: true,
+  },
+]
 </script>
 
 ```
@@ -16171,7 +16202,7 @@ When only a single input (or related control such as select or checkbox) is insi
 | rules                   | Validation rules of form, see the [following table](#formitemrule), more advanced usage at [async-validator](https://github.com/yiminghe/async-validator).             | ^[object]`Arrayable<FormItemRule>`                  | —       |
 | error                   | Field error message, set its value and the field will validate error and show this message immediately.                                                                | ^[string]                                           | —       |
 | show-message            | Whether to show the error message.                                                                                                                                     | ^[boolean]                                          | true    |
-| inline-message          | Inline style validate message.                                                                                                                                         | ^[string] / ^[boolean]                              | ''      |
+| inline-message          | Inline style validate message.                                                                                                                                         | ^[boolean]                                          | false   |
 | size                    | Control the size of components in this form-item.                                                                                                                      | ^[enum]`'' \| 'large' \| 'default' \| 'small'`      | —       |
 | for                     | Same as for in native label.                                                                                                                                           | ^[string]                                           | —       |
 | validate-status         | Validation state of formItem.                                                                                                                                          | ^[enum]`'' \| 'error' \| 'validating' \| 'success'` | —       |
