@@ -15127,12 +15127,12 @@ function confirmClick() {
 ### customization-content.vue
 ```vue
 <template>
-  <el-button text @click="table = true"
-    >Open Drawer with nested table</el-button
-  >
-  <el-button text @click="dialog = true"
-    >Open Drawer with nested form</el-button
-  >
+  <el-button text @click="table = true">
+    Open Drawer with nested table
+  </el-button>
+  <el-button text @click="dialog = true">
+    Open Drawer with nested form
+  </el-button>
   <el-drawer
     v-model="table"
     title="I have a nested table inside!"
@@ -15290,9 +15290,7 @@ const visible = ref(false)
 ### nested-drawer.vue
 ```vue
 <template>
-  <el-button type="primary" style="margin-left: 16px" @click="drawer = true">
-    open
-  </el-button>
+  <el-button type="primary" @click="drawer = true"> open </el-button>
 
   <el-drawer v-model="drawer" title="I'm outer Drawer" size="50%">
     <div>
@@ -15332,9 +15330,7 @@ const handleClose = (done: () => void) => {
 ### no-title.vue
 ```vue
 <template>
-  <el-button type="primary" style="margin-left: 16px" @click="drawer = true">
-    open
-  </el-button>
+  <el-button type="primary" @click="drawer = true"> open </el-button>
 
   <el-drawer v-model="drawer" title="I am the title" :with-header="false">
     <span>Hi there!</span>
@@ -15349,20 +15345,17 @@ const drawer = ref(false)
 
 ```
 
-### resizable-drawer.vue
+### resizable.vue
 ```vue
 <template>
-  <el-segmented
-    v-model="direction"
-    :options="options"
-    size="large"
-    @change="visible = true"
-  />
+  <el-radio-group v-model="direction" @change="drawer = true">
+    <el-radio-button value="ttb">top</el-radio-button>
+    <el-radio-button value="rtl">right</el-radio-button>
+    <el-radio-button value="btt">bottom</el-radio-button>
+    <el-radio-button value="ltr">left</el-radio-button>
+  </el-radio-group>
 
-  <el-drawer v-model="visible" :direction="direction" resizable>
-    <template #header="{ titleId, titleClass }">
-      <h4 :id="titleId" :class="titleClass">This is a custom header!</h4>
-    </template>
+  <el-drawer v-model="drawer" :direction="direction" resizable>
     This is drawer content.
   </el-drawer>
 </template>
@@ -15372,15 +15365,8 @@ import { ref } from 'vue'
 
 import type { DrawerProps } from 'element-plus'
 
-const visible = ref(false)
 const direction = ref<DrawerProps['direction']>()
-
-const options = [
-  { label: 'Top', value: 'ttb' },
-  { label: 'Right', value: 'rtl' },
-  { label: 'Bottom', value: 'btt' },
-  { label: 'Left', value: 'ltr' },
-]
+const drawer = ref(false)
 </script>
 
 ```
