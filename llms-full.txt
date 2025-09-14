@@ -24631,9 +24631,13 @@ Radio should not have too many options. Otherwise, use the Select component inst
 
 
 
-## Radio button group
+## Radio Group
 
 Suitable for choosing from some mutually exclusive options.
+
+
+
+## With borders
 
 
 
@@ -24641,19 +24645,9 @@ Suitable for choosing from some mutually exclusive options.
 
 
 
-## Button style
+## Radio Button
 
-Radio with button styles.
-
-
-
-## Button style
-
-Radio with button styles.
-
-
-
-## With borders
+Radio with button group visual effect.
 
 
 
@@ -24766,88 +24760,6 @@ const radio3 = ref('1')
 
 ```
 
-### button-fill-textcolor.vue
-```vue
-<template>
-  <div>
-    <el-radio-group v-model="radio1" size="large" fill="#6cf">
-      <el-radio-button label="New York" value="New York" />
-      <el-radio-button label="Washington" value="Washington" />
-      <el-radio-button label="Los Angeles" value="Los Angeles" />
-      <el-radio-button label="Chicago" value="Chicago" />
-    </el-radio-group>
-  </div>
-  <div style="margin-top: 20px">
-    <el-radio-group
-      v-model="radio2"
-      text-color="#626aef"
-      fill="rgb(239, 240, 253)"
-    >
-      <el-radio-button label="New York" value="New York" />
-      <el-radio-button label="Washington" value="Washington" />
-      <el-radio-button label="Los Angeles" value="Los Angeles" />
-      <el-radio-button label="Chicago" value="Chicago" />
-    </el-radio-group>
-  </div>
-  <div style="margin-top: 20px">
-    <el-radio-group v-model="radio3" size="small">
-      <el-radio-button label="New York" value="New York" />
-      <el-radio-button label="Washington" value="Washington" disabled />
-      <el-radio-button label="Los Angeles" value="Los Angeles" />
-      <el-radio-button label="Chicago" value="Chicago" />
-    </el-radio-group>
-  </div>
-</template>
-
-<script lang="ts" setup>
-import { ref } from 'vue'
-
-const radio1 = ref('New York')
-const radio2 = ref('New York')
-const radio3 = ref('New York')
-</script>
-
-```
-
-### button-style.vue
-```vue
-<template>
-  <div>
-    <el-radio-group v-model="radio1" size="large">
-      <el-radio-button label="New York" value="New York" />
-      <el-radio-button label="Washington" value="Washington" />
-      <el-radio-button label="Los Angeles" value="Los Angeles" />
-      <el-radio-button label="Chicago" value="Chicago" />
-    </el-radio-group>
-  </div>
-  <div style="margin-top: 20px">
-    <el-radio-group v-model="radio2">
-      <el-radio-button label="New York" value="New York" />
-      <el-radio-button label="Washington" value="Washington" />
-      <el-radio-button label="Los Angeles" value="Los Angeles" />
-      <el-radio-button label="Chicago" value="Chicago" />
-    </el-radio-group>
-  </div>
-  <div style="margin-top: 20px">
-    <el-radio-group v-model="radio3" size="small">
-      <el-radio-button label="New York" value="New York" />
-      <el-radio-button label="Washington" value="Washington" disabled />
-      <el-radio-button label="Los Angeles" value="Los Angeles" />
-      <el-radio-button label="Chicago" value="Chicago" />
-    </el-radio-group>
-  </div>
-</template>
-
-<script lang="ts" setup>
-import { ref } from 'vue'
-
-const radio1 = ref('New York')
-const radio2 = ref('New York')
-const radio3 = ref('New York')
-</script>
-
-```
-
 ### disabled.vue
 ```vue
 <template>
@@ -24895,7 +24807,48 @@ const options = [
 
 ```
 
-### radio-button-group.vue
+### radio-button.vue
+```vue
+<template>
+  <div>
+    <el-radio-group v-model="radio" size="large" fill="#6cf">
+      <el-radio-button label="New York" value="New York" />
+      <el-radio-button label="Washington" value="Washington" />
+      <el-radio-button label="Los Angeles" value="Los Angeles" />
+      <el-radio-button label="Chicago" value="Chicago" />
+    </el-radio-group>
+  </div>
+  <div style="margin-top: 20px">
+    <el-radio-group
+      v-model="radio"
+      text-color="#626aef"
+      fill="rgb(239, 240, 253)"
+    >
+      <el-radio-button label="New York" value="New York" />
+      <el-radio-button label="Washington" value="Washington" />
+      <el-radio-button label="Los Angeles" value="Los Angeles" />
+      <el-radio-button label="Chicago" value="Chicago" />
+    </el-radio-group>
+  </div>
+  <div style="margin-top: 20px">
+    <el-radio-group v-model="radio" size="small">
+      <el-radio-button label="New York" value="New York" />
+      <el-radio-button label="Washington" value="Washington" disabled />
+      <el-radio-button label="Los Angeles" value="Los Angeles" />
+      <el-radio-button label="Chicago" value="Chicago" />
+    </el-radio-group>
+  </div>
+</template>
+
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const radio = ref('New York')
+</script>
+
+```
+
+### radio-group.vue
 ```vue
 <template>
   <el-radio-group v-model="radio">
