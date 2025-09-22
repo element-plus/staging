@@ -39283,7 +39283,7 @@ Tree nodes can be filtered
 
 | Name           | Description                                                                                    |
 | -------------- | ---------------------------------------------------------------------------------------------- |
-| -              | Custom content for tree nodes. The scope parameter is `{ node: TreeNode, data: TreeNodeData }` |
+| default        | Custom content for tree nodes. The scope parameter is `{ node: TreeNode, data: TreeNodeData }` |
 | empty ^(2.9.0) | empty you can customize content when data is empty.                                            |
 
 ## Vue Examples
@@ -40020,7 +40020,7 @@ You can drag and drop Tree nodes by adding a `draggable` attribute.
 
 | Name           | Description                                                            |
 | -------------- | ---------------------------------------------------------------------- |
-| —              | Custom content for tree nodes. The scope parameter is `{ node, data }` |
+| default        | Custom content for tree nodes. The scope parameter is `{ node, data }` |
 | empty ^(2.3.4) | empty you can customize content when data is empty.                    |
 
 ## Vue Examples
