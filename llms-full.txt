@@ -13405,6 +13405,14 @@ You can also have multiple layer of `Drawer` just like `Dialog`.
 
 
 
+## Modal
+
+Setting `modal` to `false` will hide modal (overlay) of drawer.
+
+Starting from version ^(2.11.6), `modal-penetrable` attribute is added, which can be penetrable.
+
+
+
 
 
 
@@ -13426,6 +13434,7 @@ You can also have multiple layer of `Drawer` just like `Dialog`.
 | close-delay                | Time(milliseconds) before close                                                                                                                                                                                                                                                                              | ^[number]                                                                                                                                                                                      | 0       |
 | destroy-on-close           | Indicates whether children should be destroyed after Drawer closed                                                                                                                                                                                                                                           | ^[boolean]                                                                                                                                                                                     | false   |
 | modal                      | Should show shadowing layer                                                                                                                                                                                                                                                                                  | ^[boolean]                                                                                                                                                                                     | true    |
+| modal-penetrable ^(2.11.6) | whether the mask is penetrable. The modal attribute must be `false`.                                                                                                                                                                                                                                         | ^[boolean]                                                                                                                                                                                     | false   |
 | direction                  | Drawer's opening direction                                                                                                                                                                                                                                                                                   | ^[enum]`'rtl' \| 'ltr' \| 'ttb' \| 'btt'`                                                                                                                                                      | rtl     |
 | resizable ^(2.11.0)        | enable resizable feature for Drawer                                                                                                                                                                                                                                                                          | ^[boolean]                                                                                                                                                                                     | false   |
 | show-close                 | Should show close button at the top right of Drawer                                                                                                                                                                                                                                                          | ^[boolean]                                                                                                                                                                                     | true    |
@@ -13714,6 +13723,34 @@ import { ref } from 'vue'
 import { CircleCloseFilled } from '@element-plus/icons-vue'
 
 const visible = ref(false)
+</script>
+
+```
+
+### modal.vue
+```vue
+<template>
+  <el-button plain @click="drawerVisible = true">
+    Open the modal Drawer
+  </el-button>
+
+  <el-drawer v-model="drawerVisible" :modal="false" modal-penetrable>
+    <span>It's a modal Drawer</span>
+    <template #footer>
+      <div class="drawer-footer">
+        <el-button @click="drawerVisible = false">Cancel</el-button>
+        <el-button type="primary" @click="drawerVisible = false">
+          Confirm
+        </el-button>
+      </div>
+    </template>
+  </el-drawer>
+</template>
+
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const drawerVisible = ref(false)
 </script>
 
 ```
