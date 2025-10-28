@@ -22249,10 +22249,10 @@ complicated, you may refer to the virtual triggering for more information.
 
 ### Slots
 
-| Name      | Description                        |
-| --------- | ---------------------------------- |
-| default   | text content of popover            |
-| reference | HTML element that triggers popover |
+| Name      | Description                                                                |
+| --------- | -------------------------------------------------------------------------- |
+| default   | text content of popover                                                    |
+| reference | HTML element that triggers popover, only a single root element is accepted |
 
 ### Events
 
@@ -36981,10 +36981,10 @@ You must wait for the DOM to be mounted before using `targetElement`.
 
 ### Slots
 
-| Name    | Description                            |
-| ------- | -------------------------------------- |
-| default | Tooltip triggering & reference element |
-| content | customize content                      |
+| Name    | Description                                                                    |
+| ------- | ------------------------------------------------------------------------------ |
+| default | Tooltip triggering & reference element, only a single root element is accepted |
+| content | customize content                                                              |
 
 ### Exposes
 
