@@ -361,12 +361,12 @@ URL: https://element-plus.org/en-US/guide/i18n
 
 # Internationalization
 
-Element Plus components are using English **by default**, if you wish you use other
-languages, you can get you answer by keep reading.
+Element Plus components use English **by default**. If you want to use other
+languages, read on to find out how.
 
 ## Global configuration
 
-Element Plus provides global configurations
+Element Plus provides global configuration options.
 
 ```ts [main.ts]
 import ElementPlus from 'element-plus'
@@ -397,7 +397,7 @@ import zhCn from 'element-plus/es/locale/lang/zh-cn'
 
 ## Date and time localization
 
-We use [Day.js](https://day.js.org/docs/en/i18n/i18n) library to manage date and time in components like `DatePicker`. It is important to set a proper locale in Day.js to make the internationalization fully works. You have to import Day.js's locale config separately.
+We use [Day.js](https://day.js.org/docs/en/i18n/i18n) library to manage date and time in components like `DatePicker`. It is important to set a proper locale in Day.js to make internationalization work properly. You have to import Day.js's locale config separately.
 
 ```ts
 import 'dayjs/locale/zh-cn'
@@ -405,8 +405,8 @@ import 'dayjs/locale/zh-cn'
 
 ## CDN Usage
 
-If you are using Element Plus via CDN, then you need to do this, let's again take
-unpkg as an example
+If you are using Element Plus via CDN, you need to do the following. Let's take
+unpkg as an example:
 
 ```html
 <script src="//unpkg.com/element-plus/dist/locale/zh-cn"></script>
@@ -417,7 +417,7 @@ unpkg as an example
 </script>
 ```
 
-Full documentation refer to: [ConfigProvider](/en-US/component/config-provider)
+For full documentation, refer to: [ConfigProvider](/en-US/component/config-provider)
 
 [Supported Language List](https://github.com/element-plus/element-plus/tree/dev/packages/locale/lang)
 
@@ -492,8 +492,7 @@ Full documentation refer to: [ConfigProvider](/en-US/component/config-provider)
 </ul>
 
 If you need any other languages, [PR](https://github.com/element-plus/element-plus/pulls)
-is always welcomed, you only need to add a language file at
-[here](https://github.com/element-plus/element-plus/tree/dev/packages/locale/lang).
+is always welcome, you only need to add a language file [here](https://github.com/element-plus/element-plus/tree/dev/packages/locale/lang).
 
 <style>
   .language-list {
