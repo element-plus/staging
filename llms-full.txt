@@ -3635,7 +3635,7 @@ You can customize both the header and footer of the dropdown using slots.
 
 ### Cascader Slots
 
-| Name                     | Description                                                                                    | Scope                                                     |
+| Name                     | Description                                                                                    | Type                                                      |
 | ------------------------ | ---------------------------------------------------------------------------------------------- | --------------------------------------------------------- |
 | default                  | the custom content of cascader node, which are current Node object and node data respectively. | ^[object]`{ node: any, data: any }`                       |
 | empty                    | content when there is no matched options.                                                      | —                                                         |
@@ -3678,7 +3678,7 @@ You can customize both the header and footer of the dropdown using slots.
 
 ### CascaderPanel Slots
 
-| Name           | Description                                                                                    | Scope                               |
+| Name           | Description                                                                                    | Type                                |
 | -------------- | ---------------------------------------------------------------------------------------------- | ----------------------------------- |
 | default        | the custom content of cascader node, which are current Node object and node data respectively. | ^[object]`{ node: any, data: any }` |
 | empty ^(2.8.3) | the content of the panel when there is no data.                                                | —                                   |
@@ -8586,7 +8586,7 @@ In this section, you can learn how to use Config Provider to provide experimenta
 
 ### Config Provider Slots
 
-| Name    | Description               | Scope                                                   |
+| Name    | Description               | Type                                                    |
 | ------- | ------------------------- | ------------------------------------------------------- |
 | default | customize default content | config: provided global config (inherited from the top) |
 
@@ -24726,7 +24726,7 @@ The width of dropdown box is calculated by default based on the value of `label`
 
 ### Slots
 
-| Name             | Description                                                                                     | Subtags                                                                                                        |
+| Name             | Description                                                                                     | Type                                                                                                           |
 | ---------------- | ----------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
 | default          | Option renderer                                                                                 | —                                                                                                              |
 | header ^(2.5.2)  | content at the top of the dropdown                                                              | —                                                                                                              |
@@ -27680,7 +27680,7 @@ Sometimes you want to render the business components more smoothly when loading 
 
 ### Skeleton Slots
 
-| Name     | Description                            | Scope                      |
+| Name     | Description                            | Type                       |
 | -------- | -------------------------------------- | -------------------------- |
 | default  | real rendering DOM                     | ^[object]`$attrs`          |
 | template | content as rendering skeleton template | ^[object]`{ key: number }` |
@@ -30381,7 +30381,7 @@ Use the methods provided by Table V2 to scroll manually/programmatically with de
 
 ### TableV2 Slots
 
-| Name        | Params                                      |
+| Name        | Type                                        |
 | ----------- | ------------------------------------------- |
 | cell        | `object`\<[CellSlotProps](#typings)\>       |
 | header      | `object`\<[HeaderSlotProps](#typings)\>     |
@@ -37456,10 +37456,10 @@ Various parameter passing types of target. The string and Function types are sup
 
 ### Tour slots
 
-| Name       | Description                                                   |
-| ---------- | ------------------------------------------------------------- |
-| default    | tourStep component list                                       |
-| indicators | custom indicator, The scope parameter is `{ current, total }` |
+| Name       | Description             | Type                                          |
+| ---------- | ----------------------- | --------------------------------------------- |
+| default    | tourStep component list | —                                             |
+| indicators | custom indicator        | ^[object]`{ current: number, total: number }` |
 
 ### Tour events
 
@@ -37491,10 +37491,10 @@ Various parameter passing types of target. The string and Function types are sup
 
 ### TourStep slots
 
-| Name    | Description |
-| ------- | ----------- |
-| default | description |
-| header  | header      |
+| Name    | Description           |
+| ------- | --------------------- |
+| default | custom description    |
+| header  | custom header content |
 
 ### TourStep events
 
@@ -37863,13 +37863,13 @@ By default, Transfer looks for `key`, `label` and `disabled` in a data item. If 
 
 ### Transfer Slots
 
-| Name                 | Description                                                          |
-| -------------------- | -------------------------------------------------------------------- |
-| default              | Custom content for data items. The scope parameter is `{ option }`   |
-| left-footer          | content of left list footer                                          |
-| right-footer         | content of right list footer                                         |
-| left-empty ^(2.9.0)  | content when left panel is empty or when no data matches the filter  |
-| right-empty ^(2.9.0) | content when right panel is empty or when no data matches the filter |
+| Name                 | Description                                                          | Type                                    |
+| -------------------- | -------------------------------------------------------------------- | --------------------------------------- |
+| default              | Custom content for data items.                                       | ^[object]`{ option: TransferDataItem }` |
+| left-footer          | content of left list footer                                          | —                                       |
+| right-footer         | content of right list footer                                         | —                                       |
+| left-empty ^(2.9.0)  | content when left panel is empty or when no data matches the filter  | —                                       |
+| right-empty ^(2.9.0) | content when right panel is empty or when no data matches the filter | —                                       |
 
 ### Transfer Exposes
 
@@ -39202,10 +39202,36 @@ Tree nodes can be filtered
 
 ### TreeV2 Slots
 
-| Name           | Description                                                                                    |
-| -------------- | ---------------------------------------------------------------------------------------------- |
-| default        | Custom content for tree nodes. The scope parameter is `{ node: TreeNode, data: TreeNodeData }` |
-| empty ^(2.9.0) | empty you can customize content when data is empty.                                            |
+| Name           | Description                       | Type                                              |
+| -------------- | --------------------------------- | ------------------------------------------------- |
+| default        | custom content for tree nodes     | ^[object]`{ node: TreeNode, data: TreeNodeData }` |
+| empty ^(2.9.0) | custom content when data is empty | —                                                 |
+
+## Type Declarations
+
+<details>
+  <summary>Show declarations</summary>
+
+```ts
+type TreeNodeData = Record<string, any>
+type TreeKey = string | number
+type TreeData = TreeNodeData[]
+
+interface TreeNode {
+  key: TreeKey
+  level: number
+  parent?: TreeNode
+  children?: TreeNode[]
+  data: TreeNodeData
+  disabled?: boolean
+  label?: string
+  isLeaf?: boolean
+  expanded?: boolean
+  isEffectivelyChecked?: boolean
+}
+```
+
+</details>
 
 ## Vue Examples
 
@@ -39939,10 +39965,60 @@ You can drag and drop Tree nodes by adding a `draggable` attribute.
 
 ### Slots
 
-| Name           | Description                                                            |
-| -------------- | ---------------------------------------------------------------------- |
-| default        | Custom content for tree nodes. The scope parameter is `{ node, data }` |
-| empty ^(2.3.4) | empty you can customize content when data is empty.                    |
+| Name           | Description                       | Type                                                                                |
+| -------------- | --------------------------------- | ----------------------------------------------------------------------------------- |
+| default        | custom content for tree nodes     | ^[object]`{ node: UnwrapRef<RootTreeType['root']>, data: Tree \| TreeOptionProps }` |
+| empty ^(2.3.4) | custom content when data is empty | —                                                                                   |
+
+## Type Declarations
+
+<details>
+  <summary>Show declarations</summary>
+
+```ts
+interface RootTreeType {
+  root: Ref<Node>
+  // ...
+}
+
+// UnwrapRef<RootTreeType['root']> => Node
+type Node = {
+  canFocus: boolean
+  checked: boolean
+  childNodes: Node[]
+  data: TreeNodeData
+  expanded: boolean
+  id: number
+  indeterminate: boolean
+  isCurrent: boolean
+  isEffectivelyChecked: boolean
+  isLeaf?: boolean
+  isLeafByUser?: boolean
+  level: number
+  loaded: boolean
+  loading: boolean
+  parent: Node | null
+  store: TreeStore
+  text: string | null
+  visible: boolean
+}
+
+// TreeNodeData => Tree / TreeOptionProps
+// Tree type is your prop type.
+// TreeOptionProps is default prop type
+interface TreeOptionProps {
+  children?: string
+  label?: string | ((data: TreeNodeData, node: Node) => string)
+  disabled?: string | ((data: TreeNodeData, node: Node) => boolean)
+  isLeaf?: string | ((data: TreeNodeData, node: Node) => boolean)
+  class?: (
+    data: TreeNodeData,
+    node: Node
+  ) => string | { [key: string]: boolean }
+}
+```
+
+</details>
 
 ## Vue Examples
 
