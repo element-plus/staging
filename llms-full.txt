@@ -26305,6 +26305,7 @@ The width of dropdown box is calculated by default based on the value of `label`
 | remote                              | whether search data from server                                                                                                          | ^[boolean]                                                                                                                                                                  | false                                          |
 | debounce ^(2.11.7)                  | debounce delay during remote search, in milliseconds                                                                                     | ^[number]                                                                                                                                                                   | 300                                            |
 | remote-method                       | function that gets called when the input value changes. Its parameter is the current input value. To use this, `filterable` must be true | ^[Function]`(query: string) => void`                                                                                                                                        | —                                              |
+| remote-show-suffix ^(2.11.9)        | in remote search method show suffix icon                                                                                                 | ^[boolean]                                                                                                                                                                  | false                                          |
 | validate-event                      | whether to trigger form validation                                                                                                       | ^[boolean]                                                                                                                                                                  | true                                           |
 | offset ^(2.8.8)                     | offset of the dropdown                                                                                                                   | ^[number]                                                                                                                                                                   | 12                                             |
 | show-arrow ^(2.8.8)                 | whether the dropdown has an arrow                                                                                                        | ^[boolean]                                                                                                                                                                  | true                                           |
@@ -27330,18 +27331,39 @@ const options = Array.from({ length: 1000 }).map((_, idx) => ({
 ### remote-search.vue
 ```vue
 <template>
-  <el-select-v2
-    v-model="value"
-    style="width: 240px"
-    multiple
-    filterable
-    remote
-    :remote-method="remoteMethod"
-    clearable
-    :options="options"
-    :loading="loading"
-    placeholder="Please enter a keyword"
-  />
+  <div class="flex flex-wrap">
+    <div class="m-4">
+      <p>default</p>
+      <el-select-v2
+        v-model="value"
+        style="width: 240px"
+        multiple
+        filterable
+        remote
+        :remote-method="remoteMethod"
+        clearable
+        :options="options"
+        :loading="loading"
+        placeholder="Please enter a keyword"
+      />
+    </div>
+    <div class="m-4">
+      <p>use remote-show-suffix</p>
+      <el-select-v2
+        v-model="value"
+        style="width: 240px"
+        multiple
+        filterable
+        remote
+        :remote-method="remoteMethod"
+        remote-show-suffix
+        clearable
+        :options="options"
+        :loading="loading"
+        placeholder="Please enter a keyword"
+      />
+    </div>
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -36753,7 +36775,7 @@ Only card type Tabs support addable & closeable.
 
 
 
-## Default value
+## Default value ^(2.11.9)
 
 
 
@@ -36761,18 +36783,18 @@ Only card type Tabs support addable & closeable.
 
 ### Tabs Attributes
 
-| Name                  | Description                                                                                                                             | Type                                                                                             | Default    |
-| --------------------- | --------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ | ---------- |
-| model-value / v-model | binding value, name of the selected tab, the default value is the name of first tab                                                     | ^[string] / ^[number]                                                                            | —          |
-| default-value (2.11.9)| The value of the tab that should be active when initially rendered. (avoid initial transition)                                          | ^[string] / ^[number]                                                                            | —          |
-| type                  | type of Tab                                                                                                                             | ^[enum]`'' \| 'card' \| 'border-card'`                                                           | ''         |
-| closable              | whether Tab is closable                                                                                                                 | ^[boolean]                                                                                       | false      |
-| addable               | whether Tab is addable                                                                                                                  | ^[boolean]                                                                                       | false      |
-| editable              | whether Tab is addable and closable                                                                                                     | ^[boolean]                                                                                       | false      |
-| tab-position          | position of tabs                                                                                                                        | ^[enum]`'top' \| 'right' \| 'bottom' \| 'left'`                                                  | top        |
-| stretch               | whether width of tab automatically fits its container                                                                                   | ^[boolean]                                                                                       | false      |
-| before-leave          | hook function before switching tab. If `false` is returned or a `Promise` is returned and then is rejected, switching will be prevented | ^[Function]`(activeName: TabPaneName, oldActiveName: TabPaneName) => Awaitable<void \| boolean>` | () => true |
-| tabindex ^(2.11.7)    | tabs tabindex                                                                                                                           | ^[string] / ^[number]                                                                            | 0          |
+| Name                    | Description                                                                                                                             | Type                                                                                             | Default    |
+| ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ | ---------- |
+| model-value / v-model   | binding value, name of the selected tab, the default value is the name of first tab                                                     | ^[string] / ^[number]                                                                            | —          |
+| default-value ^(2.11.9) | The value of the tab that should be active when initially rendered. (avoid initial transition)                                          | ^[string] / ^[number]                                                                            | —          |
+| type                    | type of Tab                                                                                                                             | ^[enum]`'' \| 'card' \| 'border-card'`                                                           | ''         |
+| closable                | whether Tab is closable                                                                                                                 | ^[boolean]                                                                                       | false      |
+| addable                 | whether Tab is addable                                                                                                                  | ^[boolean]                                                                                       | false      |
+| editable                | whether Tab is addable and closable                                                                                                     | ^[boolean]                                                                                       | false      |
+| tab-position            | position of tabs                                                                                                                        | ^[enum]`'top' \| 'right' \| 'bottom' \| 'left'`                                                  | top        |
+| stretch                 | whether width of tab automatically fits its container                                                                                   | ^[boolean]                                                                                       | false      |
+| before-leave            | hook function before switching tab. If `false` is returned or a `Promise` is returned and then is rejected, switching will be prevented | ^[Function]`(activeName: TabPaneName, oldActiveName: TabPaneName) => Awaitable<void \| boolean>` | () => true |
+| tabindex ^(2.11.7)      | tabs tabindex                                                                                                                           | ^[string] / ^[number]                                                                            | 0          |
 
 ### Tabs Events
 
