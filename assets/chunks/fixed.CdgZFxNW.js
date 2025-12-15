@@ -1,1 +1,0 @@
-import{_ as s,m as e,o as a,p as c,q as t,v as f,Z as _}from"./framework.CogfG0UT.js";const r={};function p(i,m){const o=e("el-button"),n=e("el-affix");return a(),c(n,{position:"bottom",offset:20},{default:t(()=>[f(o,{type:"primary"},{default:t(()=>[_("Offset bottom 20px")]),_:1})]),_:1})}const l=s(r,[["render",p]]);export{l as E};
