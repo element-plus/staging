@@ -36880,6 +36880,12 @@ Timeline can be split into multiple activities. Timestamps are important feature
 
 
 
+## Mode ^(2.13.1)
+
+Use `mode` to control the relative position of timeline and content.
+
+
+
 ## Custom node
 
 Size, color, and icons can be customized in node.
@@ -36908,9 +36914,10 @@ Use the reverse property to control the order of the nodes.
 
 ### Timeline Attributes
 
-| Name              | Description           | Type       | Default |
-| ----------------- | --------------------- | ---------- | ------- |
-| reverse ^(2.11.9) | whether reverse order | ^[boolean] | false   |
+| Name              | Description                               | Type                                                            | Default |
+| ----------------- | ----------------------------------------- | --------------------------------------------------------------- | ------- |
+| reverse ^(2.11.9) | whether reverse order                     | ^[boolean]                                                      | false   |
+| mode ^(2.13.1)    | relative position of timeline and content | ^[enum]`'start' \| 'alternate' \| 'alternate-reverse' \| 'end'` | start   |
 
 ### Timeline Slots
 
@@ -36946,7 +36953,7 @@ Use the reverse property to control the order of the nodes.
 ### basic.vue
 ```vue
 <template>
-  <el-timeline style="max-width: 600px">
+  <el-timeline>
     <el-timeline-item
       v-for="(activity, index) in activities"
       :key="index"
@@ -36979,7 +36986,7 @@ const activities = [
 ### center.vue
 ```vue
 <template>
-  <el-timeline style="max-width: 600px">
+  <el-timeline>
     <el-timeline-item center timestamp="2018/4/12" placement="top">
       <el-card>
         <h4>Update Github template</h4>
@@ -37006,7 +37013,7 @@ const activities = [
 ### custom-node.vue
 ```vue
 <template>
-  <el-timeline style="max-width: 600px">
+  <el-timeline>
     <el-timeline-item
       v-for="(activity, index) in activities"
       :key="index"
@@ -37067,7 +37074,7 @@ const activities: ActivityType[] = [
 ### custom-timestamp.vue
 ```vue
 <template>
-  <el-timeline style="max-width: 600px">
+  <el-timeline>
     <el-timeline-item timestamp="2018/4/12" placement="top">
       <el-card>
         <h4>Update Github template</h4>
@@ -37091,12 +37098,58 @@ const activities: ActivityType[] = [
 
 ```
 
+### mode.vue
+```vue
+<template>
+  <el-radio-group v-model="mode">
+    <el-radio-button label="start" value="start" />
+    <el-radio-button label="alternate" value="alternate" />
+    <el-radio-button label="alternate-reverse" value="alternate-reverse" />
+    <el-radio-button label="end" value="end" />
+  </el-radio-group>
+
+  <el-timeline class="mt-4" :mode="mode">
+    <el-timeline-item
+      v-for="(activity, index) in activities"
+      :key="index"
+      :timestamp="activity.timestamp"
+    >
+      {{ activity.content }}
+    </el-timeline-item>
+  </el-timeline>
+</template>
+
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+import type { TimelineProps } from 'element-plus'
+
+const activities = [
+  {
+    content: 'Event start',
+    timestamp: '2018-04-15',
+  },
+  {
+    content: 'Approved',
+    timestamp: '2018-04-13',
+  },
+  {
+    content: 'Success',
+    timestamp: '2018-04-11',
+  },
+]
+
+const mode = ref<TimelineProps['mode']>('start')
+</script>
+
+```
+
 ### reverse.vue
 ```vue
 <template>
   <el-switch v-model="reverse" active-text="reverse" />
 
-  <el-timeline class="mt-2" style="max-width: 600px" :reverse="reverse">
+  <el-timeline class="mt-2" :reverse="reverse">
     <el-timeline-item
       v-for="(activity, index) in activities"
       :key="index"
