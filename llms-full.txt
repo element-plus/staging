@@ -8185,6 +8185,12 @@ The `disabled` attribute determines if the color picker is fully disabled.
 | predefine                | predefined color options                   | ^[array]`string[]`                                                                                               | —       |
 | validate-event ^(2.11.7) | whether to trigger form validation         | ^[boolean]                                                                                                       | true    |
 
+### Slots
+
+| Name   | Description                       |
+| ------ | --------------------------------- |
+| footer | content to append after the Input |
+
 ### Exposes
 
 | Name             | Description           | Type                     |
