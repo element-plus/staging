@@ -8747,7 +8747,9 @@ In this section, you can learn how to use Config Provider to provide experimenta
 import { reactive } from 'vue'
 import { buttonTypes } from 'element-plus'
 
-const config = reactive({
+import type { ButtonConfigContext } from 'element-plus'
+
+const config = reactive<ButtonConfigContext>({
   autoInsertSpace: true,
   type: 'default',
   plain: true,
@@ -8763,7 +8765,9 @@ const config = reactive({
 <script lang="ts" setup>
 import { reactive } from 'vue'
 
-const config = reactive({
+import type { CardConfigContext } from 'element-plus'
+
+const config = reactive<CardConfigContext>({
   shadow: 'always',
 })
 </script>
@@ -9109,10 +9113,12 @@ const handleChange = (value) => {
 <script lang="ts" setup>
 import { reactive } from 'vue'
 
+import type { LinkConfigContext } from 'element-plus'
+
 const linkTypes = ['primary', 'success', 'warning', 'info', 'danger', 'default']
 const underlineOptions = ['always', 'never', 'hover']
 
-const config = reactive({
+const config = reactive<LinkConfigContext>({
   type: 'success',
   underline: 'always',
 })
