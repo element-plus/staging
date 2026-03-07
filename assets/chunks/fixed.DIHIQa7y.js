@@ -1,1 +1,0 @@
-import{ab as n,ai as e,K as s,v as c,P as t,O as f,Y as r}from"./framework.anB48RUA.js";const _={};function i(p,x){const o=e("el-button"),a=e("el-affix");return c(),s(a,{position:"bottom",offset:20},{default:t(()=>[f(o,{type:"primary"},{default:t(()=>[r("Offset bottom 20px")]),_:1})]),_:1})}const m=n(_,[["render",i]]);export{m as E};
