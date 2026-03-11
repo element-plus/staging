@@ -17756,12 +17756,13 @@ Prepend or append an element, generally a label or a button.
 
 ### Slots
 
-| Name    | Description                                                               |
-| ------- | ------------------------------------------------------------------------- |
-| prefix  | content as Input prefix, only works when `type` is not 'textarea'         |
-| suffix  | content as Input suffix, only works when `type` is not 'textarea'         |
-| prepend | content to prepend before Input, only works when `type` is not 'textarea' |
-| append  | content to append after Input, only works when `type` is not 'textarea'   |
+| Name                    | Description                                                                                                           |
+| ----------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| prefix                  | content as Input prefix, only works when `type` is not 'textarea'                                                     |
+| suffix                  | content as Input suffix, only works when `type` is not 'textarea'                                                     |
+| prepend                 | content to prepend before Input, only works when `type` is not 'textarea'                                             |
+| append                  | content to append after Input, only works when `type` is not 'textarea'                                               |
+| password-icon ^(2.13.6) | content as Input password icon, only works when `show-password` is true. The scope variable is `{ visible: boolean }` |
 
 ### Exposes
 
@@ -18082,20 +18083,45 @@ const select = ref('')
 ### password.vue
 ```vue
 <template>
-  <el-input
-    v-model="input"
-    style="width: 240px"
-    type="password"
-    placeholder="Please input password"
-    show-password
-  />
+  <div class="input-group">
+    <el-input
+      v-model="input"
+      style="width: 240px"
+      type="password"
+      placeholder="Please input password"
+      show-password
+    />
+    <el-input
+      v-model="input"
+      style="width: 240px"
+      type="password"
+      placeholder="Please input password"
+      show-password
+    >
+      <template #password-icon="{ visible }">
+        <el-icon :size="16">
+          <Unlock v-if="visible" />
+          <Lock v-else />
+        </el-icon>
+      </template>
+    </el-input>
+  </div>
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue'
+import { Lock, Unlock } from '@element-plus/icons-vue'
 
 const input = ref('')
 </script>
+
+<style scoped>
+.input-group {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
+</style>
 
 ```
 
