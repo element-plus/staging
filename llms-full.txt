@@ -13481,13 +13481,13 @@ You can set the style of divider.
 | ---------------- | ---------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
 | direction        | Set divider's direction                                    | ^[enum]`'horizontal' \| 'vertical'`                                                                                                         | horizontal |
 | border-style     | Set the style of divider                                   | ^[enum]`'none' \| 'solid' \| 'hidden' \| 'dashed' \| ...` [css/border-style](https://developer.mozilla.org/zh-CN/docs/Web/CSS/border-style) | solid      |
-| content-position | the position of the customized content on the divider line | ^[enum]`'left' \| 'right' \| 'center' `                                                                                                     | center     |
+| content-position | The position of the customized content on the divider line | ^[enum]`'left' \| 'right' \| 'center'`                                                                                                      | center     |
 
 ### Slots
 
 | Name    | Description                            |
 | ------- | -------------------------------------- |
-| default | customized content on the divider line |
+| default | Customized content on the divider line |
 
 ## Vue Examples
 
@@ -16160,7 +16160,7 @@ import { Edit, Share, Delete, Search, Loading } from '@element-plus/icons-vue'
 
 | Name    | Description               |
 | ------- | ------------------------- |
-| default | customize default content |
+| default | Customize default content |
 
 ---
 Title: Image
@@ -29443,9 +29443,9 @@ When `lazy` is enabled, the panel size will not update in real time during dragg
 
 ### SplitterPanel Exposes
 
-| Name                       | Description                 | Type                           |
-| -------------------------- | --------------------------- | ------------------------------ |
-| splitterPanelRef ^(2.11.9) | splitter-panel html element | ^[object]`Ref<HTMLDivElement>` |
+| Name                       | Description                | Type                           |
+| -------------------------- | -------------------------- | ------------------------------ |
+| splitterPanelRef ^(2.11.9) | SplitterPanel html element | ^[object]`Ref<HTMLDivElement>` |
 
 ## Vue Examples
 
