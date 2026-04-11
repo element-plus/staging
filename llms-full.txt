@@ -11336,26 +11336,27 @@ Note, date time locale (month name, first day of the week ...) are also configur
 
 ### Attributes
 
-| Name                  | Description                                                                                                                  | Type                                                                                                                                                           | Default    |
-| --------------------- | ---------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
-| model-value / v-model | binding value, if it is an `range` picker, the length of the array should be 2                                               | ^[number] / ^[string] / ^[Date] / ^[array]`number[] \| string[] \| Date[]`                                                                                     | ''         |
-| border                | whether the date picker is bordered                                                                                          | ^[boolean]                                                                                                                                                     | true       |
-| disabled              | whether DatePicker is disabled                                                                                               | ^[boolean]                                                                                                                                                     | false      |
-| clearable             | whether to show clear button                                                                                                 | ^[boolean]                                                                                                                                                     | true       |
-| editable ^(2.13.0)    | whether the input is editable                                                                                                | ^[boolean]                                                                                                                                                     | true       |
-| type                  | type of the picker                                                                                                           | ^[enum]`'year' \| 'years' \|'month' \| 'months' \| 'date' \| 'dates' \| 'datetime' \| 'week' \| 'datetimerange' \| 'daterange' \| 'monthrange' \| 'yearrange'` | date       |
-| default-value         | optional, default date of the calendar                                                                                       | ^[object]`Date \| [Date, Date]`                                                                                                                                | —          |
-| default-time          | optional, the time value to use when selecting date range                                                                    | ^[object]`Date \| [Date, Date]`                                                                                                                                | —          |
-| value-format          | optional, format of binding value. If not specified, the binding value will be a Date object                                 | ^[string]                                                                                                                                                      | —          |
-| date-format           | optional, format of the date displayed in input's inner panel                                                                | ^[string] see [date formats](https://day.js.org/docs/en/display/format)                                                                                        | YYYY-MM-DD |
-| time-format           | optional, format of the time displayed in input's inner panel                                                                | ^[string] see [date formats](https://day.js.org/docs/en/display/format)                                                                                        | HH:mm:ss   |
-| unlink-panels         | unlink two date-panels in range-picker                                                                                       | ^[boolean]                                                                                                                                                     | false      |
-| disabled-date         | a function determining if a date is disabled with that date as its parameter. Should return a Boolean                        | ^[Function]`(data: Date) => boolean`                                                                                                                           | —          |
-| shortcuts             | an object array to set shortcut options                                                                                      | ^[array]`Array<{ text: string, value: Date \| Function }>`                                                                                                     | []         |
-| cell-class-name       | set custom className                                                                                                         | ^[Function]`(data: Date) => string`                                                                                                                            | —          |
-| show-footer           | whether to show footer where the date picker is one ^[enum]`'dates' \| 'months' \| 'years' \| 'datetime' \| 'datetimerange'` | ^[boolean]                                                                                                                                                     | false      |
-| show-confirm          | whether to show the confirm button                                                                                           | ^[boolean]                                                                                                                                                     | false      |
-| show-week-number      | show the week number besides the week                                                                                        | ^[boolean]                                                                                                                                                     | false      |
+| Name                   | Description                                                                                                                  | Type                                                                                                                                                           | Default    |
+| ---------------------- | ---------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
+| model-value / v-model  | binding value, if it is an `range` picker, the length of the array should be 2                                               | ^[number] / ^[string] / ^[Date] / ^[array]`number[] \| string[] \| Date[]`                                                                                     | ''         |
+| border                 | whether the date picker is bordered                                                                                          | ^[boolean]                                                                                                                                                     | true       |
+| disabled               | whether DatePicker is disabled                                                                                               | ^[boolean]                                                                                                                                                     | false      |
+| clearable              | whether to show clear button                                                                                                 | ^[boolean]                                                                                                                                                     | true       |
+| editable ^(2.13.0)     | whether the input is editable                                                                                                | ^[boolean]                                                                                                                                                     | true       |
+| type                   | type of the picker                                                                                                           | ^[enum]`'year' \| 'years' \|'month' \| 'months' \| 'date' \| 'dates' \| 'datetime' \| 'week' \| 'datetimerange' \| 'daterange' \| 'monthrange' \| 'yearrange'` | date       |
+| default-value          | optional, default date of the calendar                                                                                       | ^[object]`Date \| [Date, Date]`                                                                                                                                | —          |
+| default-time           | optional, the time value to use when selecting date range                                                                    | ^[object]`Date \| [Date, Date]`                                                                                                                                | —          |
+| value-format           | optional, format of binding value. If not specified, the binding value will be a Date object                                 | ^[string]                                                                                                                                                      | —          |
+| date-format            | optional, format of the date displayed in input's inner panel                                                                | ^[string] see [date formats](https://day.js.org/docs/en/display/format)                                                                                        | YYYY-MM-DD |
+| time-format            | optional, format of the time displayed in input's inner panel                                                                | ^[string] see [date formats](https://day.js.org/docs/en/display/format)                                                                                        | HH:mm:ss   |
+| unlink-panels          | unlink two date-panels in range-picker                                                                                       | ^[boolean]                                                                                                                                                     | false      |
+| single-panel ^(2.14.0) | show only one panel in range-picker                                                                                          | ^[boolean]                                                                                                                                                     | false      |
+| disabled-date          | a function determining if a date is disabled with that date as its parameter. Should return a Boolean                        | ^[Function]`(data: Date) => boolean`                                                                                                                           | —          |
+| shortcuts              | an object array to set shortcut options                                                                                      | ^[array]`Array<{ text: string, value: Date \| Function }>`                                                                                                     | []         |
+| cell-class-name        | set custom className                                                                                                         | ^[Function]`(data: Date) => string`                                                                                                                            | —          |
+| show-footer            | whether to show footer where the date picker is one ^[enum]`'dates' \| 'months' \| 'years' \| 'datetime' \| 'datetimerange'` | ^[boolean]                                                                                                                                                     | false      |
+| show-confirm           | whether to show the confirm button                                                                                           | ^[boolean]                                                                                                                                                     | false      |
+| show-week-number       | show the week number besides the week                                                                                        | ^[boolean]                                                                                                                                                     | false      |
 
 ### Events
 
@@ -11558,6 +11559,10 @@ Picking a year range is supported.
 
 
 
+## Single Panel ^(2.14.0)
+
+
+
 ## Default Value
 
 If user hasn't picked a date, shows today's calendar by default. You can use `default-value` to set another date. Its value should be parsable by `new Date()`.
@@ -11658,6 +11663,7 @@ Note, date time locale (month name, first day of the week ...) are also configur
 | id                           | same as `id` in native input                                                                                                          | ^[string] / ^[array]`[string, string]`                                                                                                                         | —                                  |
 | name                         | same as `name` in native input                                                                                                        | ^[string] / ^[array]`[string, string]`                                                                                                                         | ''                                 |
 | unlink-panels                | unlink two date-panels in range-picker                                                                                                | ^[boolean]                                                                                                                                                     | false                              |
+| single-panel ^(2.14.0)       | show only one panel in range-picker                                                                                                   | ^[boolean]                                                                                                                                                     | false                              |
 | prefix-icon                  | custom prefix icon component. By default, if the value of `type` is `TimeLikeType`, the value is `Clock`, else is `Calendar`          | ^[string] / ^[object]`Component`                                                                                                                               | ''                                 |
 | clear-icon                   | custom clear icon component                                                                                                           | ^[string] / ^[object]`Component`                                                                                                                               | `CircleClose`                      |
 | validate-event               | whether to trigger form validation                                                                                                    | ^[boolean]                                                                                                                                                     | true                               |
@@ -12902,6 +12908,101 @@ const value6 = ref('')
 
 ```
 
+### single-panel.vue
+```vue
+<template>
+  <div class="demo-date-picker">
+    <div class="block">
+      <span class="demonstration">date range</span>
+      <el-date-picker v-model="value1" type="daterange" single-panel />
+    </div>
+    <div class="block">
+      <span class="demonstration">month range</span>
+      <el-date-picker v-model="value2" type="monthrange" single-panel />
+    </div>
+    <div class="block">
+      <span class="demonstration">year range</span>
+      <el-date-picker v-model="value3" type="yearrange" single-panel />
+    </div>
+  </div>
+</template>
+
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const value1 = ref()
+const value2 = ref()
+const value3 = ref()
+</script>
+
+<style scoped>
+.demo-date-picker {
+  display: flex;
+  width: 100%;
+  padding: 0;
+  flex-wrap: wrap;
+}
+
+.demo-date-picker .block {
+  padding: 1.5rem 0;
+  text-align: center;
+  border-right: solid 1px var(--el-border-color);
+  flex: 1;
+  min-width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.demo-date-picker .block:last-child {
+  border-right: none;
+}
+
+.demo-date-picker .block :deep(.el-date-editor) {
+  width: 300px;
+}
+
+.demo-date-picker .demonstration {
+  display: block;
+  color: var(--el-text-color-secondary);
+  font-size: 14px;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+@media screen and (max-width: 1200px) {
+  .demo-date-picker .block {
+    flex: 0 0 50%;
+    border-bottom: solid 1px var(--el-border-color);
+  }
+
+  .demo-date-picker .block:nth-child(2n) {
+    border-right: none;
+  }
+
+  .demo-date-picker .block:nth-last-child(-n + 2):nth-child(2n + 1),
+  .demo-date-picker .block:last-child {
+    border-bottom: none;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .demo-date-picker .block {
+    flex: 0 0 100%;
+    padding: 1rem 0;
+    min-width: auto;
+    border-right: none;
+    border-bottom: solid 1px var(--el-border-color);
+  }
+
+  .demo-date-picker .block:last-child {
+    border-bottom: none;
+  }
+}
+</style>
+
+```
+
 ### year-range.vue
 ```vue
 <template>
@@ -13047,6 +13148,10 @@ Use `date-format` and `time-format` to control displayed text's format in the dr
 
 
 
+## Single Panel ^(2.14.0)
+
+
+
 ## Default time value for start date and end date
 
 
@@ -13089,6 +13194,7 @@ Custom icons available with slots.
 | id                           | same as `id` in native input                                                                                         | ^[string] / ^[array]`[string, string]`                                                         | —                                  |
 | name                         | same as `name` in native input                                                                                       | ^[string]                                                                                      | —                                  |
 | unlink-panels                | unlink two date-panels in range-picker                                                                               | ^[boolean]                                                                                     | false                              |
+| single-panel ^(2.14.0)       | show only one panel in range-picker                                                                                  | ^[boolean]                                                                                     | false                              |
 | prefix-icon                  | Custom prefix icon component                                                                                         | ^[string] / `Component`                                                                        | Date                               |
 | clear-icon                   | Custom clear icon component                                                                                          | ^[string] / `Component`                                                                        | CircleClose                        |
 | shortcuts                    | an object array to set shortcut options                                                                              | ^[array]`Array<{ text: string, value: Date \| Function }>`                                     | —                                  |
@@ -13103,7 +13209,7 @@ Custom icons available with slots.
 | show-now ^(2.8.7)            | whether to show the now button                                                                                       | ^[boolean]                                                                                     | true                               |
 | show-footer ^(2.10.5)        | whether to show footer where the date picker is one ^[enum]`'datetime' \| 'datetimerange'`                           | ^[boolean]                                                                                     | true                               |
 | show-confirm ^(2.11.0)       | whether to show the confirm button                                                                                   | ^[boolean]                                                                                     | true                               |
-| show-week-number ^(2.10.3)   | show the week number besides the week                                                                                | `boolean`                                                                                      | false                              |
+| show-week-number ^(2.10.3)   | show the week number besides the week                                                                                | ^[boolean]                                                                                     | false                              |
 
 ### Events
 
@@ -13825,6 +13931,49 @@ const defaultTime2: [Date, Date] = [
     width: 100%;
     max-width: 300px;
   }
+}
+</style>
+
+```
+
+### single-panel.vue
+```vue
+<template>
+  <div class="demo-date-picker">
+    <div class="block">
+      <span class="demonstration">single-panel</span>
+      <el-date-picker v-model="value1" type="datetimerange" single-panel />
+    </div>
+  </div>
+</template>
+
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const value1 = ref()
+</script>
+
+<style scoped>
+.demo-date-picker {
+  display: flex;
+  width: 100%;
+  padding: 0;
+  flex-wrap: wrap;
+}
+.demo-date-picker .block {
+  padding: 30px 0;
+  text-align: center;
+  border-right: solid 1px var(--el-border-color);
+  flex: 1;
+}
+.demo-date-picker .block:last-child {
+  border-right: none;
+}
+.demo-date-picker .demonstration {
+  display: block;
+  color: var(--el-text-color-secondary);
+  font-size: 14px;
+  margin-bottom: 20px;
 }
 </style>
 
