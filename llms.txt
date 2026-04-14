@@ -56,6 +56,7 @@
 - [Image](https://element-plus.org/en-US/component/image)
 - [Infinite Scroll](https://element-plus.org/en-US/component/infinite-scroll)
 - [Input Number](https://element-plus.org/en-US/component/input-number)
+- [InputOtp](https://element-plus.org/en-US/component/input-otp)
 - [InputTag](https://element-plus.org/en-US/component/input-tag)
 - [Input](https://element-plus.org/en-US/component/input)
 - [Layout](https://element-plus.org/en-US/component/layout)
