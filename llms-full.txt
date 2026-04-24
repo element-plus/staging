@@ -5354,6 +5354,20 @@ You can customize both the header and footer of the dropdown using slots.
 
 
 
+## Virtual Scroll ^(2.14.0)
+
+When dealing with large amounts of data, you can enable virtual scrolling to improve performance.
+
+
+
+## Custom Suggestion Width ^(2.14.0)
+
+The width of the suggestion panel (when filtering) is calculated by default based on the maximum width of the matched options. If you customize the suggestion options through the `suggestion-item` slot, it is likely that the text displayed in the options is not equal to the value of `label`, resulting in calculation errors. In this case, you can use the `fit-input-width` attribute to fix its width. When the value is `number`, the width is a specific fixed pixel value.
+
+
+
+
+
 ## Cascader API
 
 ### Cascader Attributes
@@ -5392,6 +5406,10 @@ You can customize both the header and footer of the dropdown using slots.
 | placement ^(2.8.1)                         | position of dropdown                                                                                                                                                             | ^[enum]`'top' \| 'top-start' \| 'top-end' \| 'bottom' \| 'bottom-start' \| 'bottom-end' \| 'left' \| 'left-start' \| 'left-end' \| 'right' \| 'right-start' \| 'right-end'` | bottom-start |
 | popper-append-to-body ^(deprecated)        | whether to append the popper menu to body. If the positioning of the popper is wrong, you can try to set this prop to false                                                      | ^[boolean]                                                                                                                                                                  | true         |
 | show-checked-strategy ^(2.10.5)            | strategy for displaying checked nodes in multiple selection mode. Use `parent` when you want things tidy. Use `child` when every single item matters                             | ^[enum]`'parent' \| 'child'`                                                                                                                                                | child        |
+| virtual-scroll ^(2.14.0)                   | whether to enable virtual scrolling for large data                                                                                                                               | ^[boolean]                                                                                                                                                                  | false        |
+| fit-input-width ^(2.14.0)                  | whether the width of the suggestion panel is the same as the input, if the value is `number`, then the width is fixed                                                            | ^[boolean] / ^[number]                                                                                                                                                      | false        |
+| item-size ^(2.14.0)                        | node height for virtual scrolling (px)                                                                                                                                           | ^[number]                                                                                                                                                                   | 34           |
+| height ^(2.14.0)                           | menu height for virtual scrolling (px)                                                                                                                                           | ^[number]                                                                                                                                                                   | 204          |
 
 ### Cascader Events
 
@@ -5433,11 +5451,14 @@ You can customize both the header and footer of the dropdown using slots.
 
 ### CascaderPanel Attributes
 
-| Name                    | Description                                                                              | Type                                                      | Default |
-| ----------------------- | ---------------------------------------------------------------------------------------- | --------------------------------------------------------- | ------- |
-| model-value / v-model   | binding value                                                                            | ^[string]/^[number]/^[array]`string[] \| number[] \| any` | —       |
-| options                 | data of the options, the key of `value` and `label` can be customize by `CascaderProps`. | ^[array]`CascaderOption[]`                                | —       |
-| [props](#cascaderprops) | configuration options, see the following `CascaderProps` table.                          | ^[object]`CascaderProps`                                  | —       |
+| Name                     | Description                                                                              | Type                                                      | Default |
+| ------------------------ | ---------------------------------------------------------------------------------------- | --------------------------------------------------------- | ------- |
+| model-value / v-model    | binding value                                                                            | ^[string]/^[number]/^[array]`string[] \| number[] \| any` | —       |
+| options                  | data of the options, the key of `value` and `label` can be customize by `CascaderProps`. | ^[array]`CascaderOption[]`                                | —       |
+| [props](#cascaderprops)  | configuration options, see the following `CascaderProps` table.                          | ^[object]`CascaderProps`                                  | —       |
+| virtual-scroll ^(2.14.0) | whether to enable virtual scrolling for large data                                       | ^[boolean]                                                | false   |
+| item-size ^(2.14.0)      | node height for virtual scrolling (px)                                                   | ^[number]                                                 | 34      |
+| height ^(2.14.0)         | menu height for virtual scrolling (px)                                                   | ^[number]                                                 | 204     |
 
 ### CascaderPanel Events
 
@@ -7763,6 +7784,91 @@ const options = [
 
 ```
 
+### fit-input-width.vue
+```vue
+<template>
+  <div class="flex flex-wrap gap-4 items-center">
+    <el-cascader
+      v-model="value"
+      :options="options"
+      placeholder="Default expanding panel"
+      filterable
+    />
+
+    <el-cascader
+      v-model="value"
+      :options="options"
+      placeholder="Fit input width"
+      filterable
+      fit-input-width
+    />
+
+    <el-cascader
+      v-model="value"
+      :options="options"
+      placeholder="Fixed width (400px)"
+      filterable
+      :fit-input-width="400"
+    >
+      <template #suggestion-item="{ item }">
+        <div>{{ item.text }} (Custom content that is very long)</div>
+      </template>
+    </el-cascader>
+  </div>
+</template>
+
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const value = ref()
+const options = [
+  {
+    value: 'guide',
+    label: 'Guide',
+    children: [
+      {
+        value: 'disciplines',
+        label: 'Disciplines',
+        children: [
+          {
+            value: 'consistency',
+            label: 'Consistency',
+          },
+          {
+            value: 'feedback',
+            label: 'Feedback',
+          },
+          {
+            value: 'efficiency',
+            label: 'Efficiency',
+          },
+          {
+            value: 'controllability',
+            label: 'Controllability',
+          },
+        ],
+      },
+      {
+        value: 'navigation',
+        label: 'Navigation',
+        children: [
+          {
+            value: 'side nav',
+            label: 'Side Navigation',
+          },
+          {
+            value: 'top nav',
+            label: 'Top Navigation',
+          },
+        ],
+      },
+    ],
+  },
+]
+</script>
+
+```
+
 ### last-level.vue
 ```vue
 <template>
@@ -8836,6 +8942,69 @@ const options = [
     ],
   },
 ]
+</script>
+
+```
+
+### virtual-scroll.vue
+```vue
+<template>
+  <el-cascader
+    v-model="value"
+    :options="options"
+    :filter-method="filterMethod"
+    filterable
+    virtual-scroll
+    clearable
+    placeholder="Select with large data"
+  />
+</template>
+
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+import type { CascaderNode } from 'element-plus'
+
+interface CascaderExampleOption {
+  value: string
+  label: string
+  children?: CascaderExampleOption[]
+}
+
+const value = ref<string[]>([])
+
+const filterMethod = (node: CascaderNode, keyword: string) => {
+  return node.text.toLowerCase().includes(keyword.toLowerCase())
+}
+
+const generateOptions = (count: number): CascaderExampleOption[] => {
+  return Array.from({ length: count }).map((_, index) => ({
+    value: `option-${index}`,
+    label: `Option ${index + 1}`,
+    children: [
+      {
+        value: `child-${index}-1`,
+        label: `Child ${index + 1}-1`,
+        children: [
+          {
+            value: `grandchild-${index}-1-1`,
+            label: `Grandchild ${index + 1}-1-1`,
+          },
+          {
+            value: `grandchild-${index}-1-2`,
+            label: `Grandchild ${index + 1}-1-2`,
+          },
+        ],
+      },
+      {
+        value: `child-${index}-2`,
+        label: `Child ${index + 1}-2`,
+      },
+    ],
+  }))
+}
+
+const options = ref<CascaderExampleOption[]>(generateOptions(20000))
 </script>
 
 ```
