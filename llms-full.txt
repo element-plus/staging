@@ -35990,6 +35990,37 @@ type TableColumnCtx<T extends DefaultRow = DefaultRow> = {
 
 ## FAQ
 
+#### How to infer the correct slot types for `el-table-column`?
+
+`el-table-column` is a generic component. If TypeScript cannot infer the row type for its slots from the surrounding context, place Vue's `@vue-generic` directive comment immediately before `el-table-column` and pass the row type explicitly. For more details, see the Vue documentation on [Generics](https://vuejs.org/api/sfc-script-setup.html#generics).
+
+```vue{3}
+<template>
+  <el-table :data="tableData">
+    <!-- @vue-generic {User} -->
+    <el-table-column label="Name">
+      <template #default="{ row }">
+        {{ row.name }}
+      </template>
+    </el-table-column>
+  </el-table>
+</template>
+
+<script lang="ts" setup>
+interface User {
+  name: string
+  address: string
+}
+
+const tableData: User[] = [
+  {
+    name: 'Tom',
+    address: 'No. 189, Grove St, Los Angeles',
+  },
+]
+</script>
+```
+
 #### How to use image preview in the table?
 
 ```vue{4}
@@ -36141,6 +36172,7 @@ const tableData: User[] = [
 ```vue
 <template>
   <el-table :data="tableData" style="width: 100%">
+    <!-- @vue-generic {User} -->
     <el-table-column label="Date" width="180">
       <template #default="scope">
         <div style="display: flex; align-items: center">
@@ -36149,6 +36181,7 @@ const tableData: User[] = [
         </div>
       </template>
     </el-table-column>
+    <!-- @vue-generic {User} -->
     <el-table-column label="Name" width="180">
       <template #default="scope">
         <el-popover effect="light" trigger="hover" placement="top" width="auto">
@@ -36162,6 +36195,7 @@ const tableData: User[] = [
         </el-popover>
       </template>
     </el-table-column>
+    <!-- @vue-generic {User} -->
     <el-table-column label="Operations">
       <template #default="scope">
         <el-button size="small" @click="handleEdit(scope.$index, scope.row)">
@@ -36227,6 +36261,7 @@ const tableData: User[] = [
   <el-table :data="filterTableData" style="width: 100%">
     <el-table-column label="Date" prop="date" />
     <el-table-column label="Name" prop="name" />
+    <!-- @vue-generic {User} -->
     <el-table-column align="right">
       <template #header>
         <el-input v-model="search" size="small" placeholder="Type to search" />
@@ -36366,6 +36401,7 @@ const tableData = [
     :preserve-expanded-content="preserveExpanded"
     style="width: 100%"
   >
+    <!-- @vue-generic {typeof tableData[number]} -->
     <el-table-column type="expand">
       <template #default="props">
         <div m="4">
@@ -36641,6 +36677,7 @@ const tableData = [
     <el-table-column prop="name" label="Name" width="180" />
     <el-table-column prop="address" label="Address" :formatter="formatter" />
 
+    <!-- @vue-generic {User} -->
     <el-table-column
       prop="tag"
       label="Tag"
@@ -36960,6 +36997,7 @@ const tableData = [
     <el-table-column prop="city" label="City" width="120" />
     <el-table-column prop="address" label="Address" width="600" />
     <el-table-column prop="zip" label="Zip" width="120" />
+    <!-- @vue-generic {UnwrapRef<typeof tableData>[number]} -->
     <el-table-column fixed="right" label="Operations" min-width="120">
       <template #default="scope">
         <el-button
@@ -36981,6 +37019,8 @@ const tableData = [
 <script lang="ts" setup>
 import { ref } from 'vue'
 import dayjs from 'dayjs'
+
+import type { UnwrapRef } from 'vue'
 
 const now = new Date()
 
@@ -37173,6 +37213,7 @@ const tableData = [
     @selection-change="handleSelectionChange"
   >
     <el-table-column type="selection" :selectable="selectable" width="55" />
+    <!-- @vue-generic {User} -->
     <el-table-column label="Date" width="120">
       <template #default="scope">{{ scope.row.date }}</template>
     </el-table-column>
@@ -37403,6 +37444,7 @@ const tableData: User[] = [
 <template>
   <el-table :data="tableData" style="width: 100%">
     <el-table-column type="selection" width="55" />
+    <!-- @vue-generic {User} -->
     <el-table-column label="Date" width="120">
       <template #default="scope">{{ scope.row.date }}</template>
     </el-table-column>
@@ -37647,7 +37689,7 @@ interface Product {
   amount3: number
 }
 
-interface SummaryMethodProps<T = Product> {
+interface SummaryMethodProps<T extends Product = Product> {
   columns: TableColumnCtx<T>[]
   data: T[]
 }
@@ -37782,6 +37824,7 @@ const tableData = [
       label="extends table formatter"
       width="240"
     />
+    <!-- @vue-generic {TableData} -->
     <el-table-column
       prop="tags"
       label="formatter object"
