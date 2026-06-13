@@ -39430,6 +39430,12 @@ By default, Transfer looks for `key`, `label` and `disabled` in a data item. If 
 
 
 
+## Virtual Scroll ^(2.14.2)
+
+When dealing with large amounts of data, you can enable virtual scrolling to improve performance.
+
+
+
 ## Transfer API
 
 ### Transfer Attributes
@@ -39450,6 +39456,8 @@ By default, Transfer looks for `key`, `label` and `disabled` in a data item. If 
 | left-default-checked        | key array of initially checked data items of the left list                                                                                                                                                                                                                         | ^[array]`Array<string \| number>`                                  | []       |
 | right-default-checked       | key array of initially checked data items of the right list                                                                                                                                                                                                                        | ^[array]`Array<string \| number>`                                  | []       |
 | validate-event              | whether to trigger form validation                                                                                                                                                                                                                                                 | ^[boolean]                                                         | true     |
+| virtual-scroll ^(2.14.2)    | whether to enable virtual scrolling                                                                                                                                                                                                                                                | ^[boolean]                                                         | false    |
+| item-size ^(2.14.2)         | item height for virtual scrolling                                                                                                                                                                                                                                                  | ^[number]                                                          | 30       |
 
 ### Transfer Events
 
@@ -39787,6 +39795,39 @@ const generateData = () => {
     data.push({
       value: i,
       desc: `Option ${i}`,
+      disabled: i % 4 === 0,
+    })
+  }
+  return data
+}
+
+const data = ref<Option[]>(generateData())
+const value = ref([])
+</script>
+
+```
+
+### virtual-scroll.vue
+```vue
+<template>
+  <el-transfer v-model="value" :data="data" virtual-scroll :item-size="30" />
+</template>
+
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+interface Option {
+  key: number
+  label: string
+  disabled: boolean
+}
+
+const generateData = () => {
+  const data: Option[] = []
+  for (let i = 1; i <= 2000; i++) {
+    data.push({
+      key: i,
+      label: `Option ${i}`,
       disabled: i % 4 === 0,
     })
   }
