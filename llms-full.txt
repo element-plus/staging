@@ -22310,7 +22310,7 @@ Displays a global notification message at a corner of the page.
 
 ## With types
 
-We provide four types: success, warning, info and error.
+We provide five types: primary, success, warning, info and error.
 
 
 
@@ -22491,18 +22491,16 @@ const open2 = () => {
 }
 
 const open3 = () => {
-  ElNotification({
+  ElNotification.info({
     title: 'Info',
     message: 'This is an info message',
-    type: 'info',
   })
 }
 
 const open4 = () => {
-  ElNotification({
+  ElNotification.error({
     title: 'Error',
     message: 'This is an error message',
-    type: 'error',
   })
 }
 
