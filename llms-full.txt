@@ -11045,10 +11045,10 @@ import { reactive } from 'vue'
 
 import type { TableConfigContext } from 'element-plus'
 
-const config = reactive<TableConfigContext>({
+const config = reactive({
   showOverflowTooltip: true,
   tooltipEffect: 'dark',
-})
+} satisfies TableConfigContext)
 
 interface User {
   date: string
@@ -11326,7 +11326,7 @@ const item = {
   name: 'Tom',
   address: 'No. 189, Grove St, Los Angeles',
 }
-const tableData = ref(Array.from({ length: 20 }).fill(item))
+const tableData = ref(Array.from({ length: 20 }, () => item))
 </script>
 
 <style scoped>
@@ -20261,14 +20261,18 @@ import { ElementPlus } from '@element-plus/icons-vue'
 
 import type { TagProps } from 'element-plus'
 
-const type: Array<TagProps['type']> = [
+const type: Array<NonNullable<TagProps['type']>> = [
   'primary',
   'success',
   'info',
   'warning',
   'danger',
 ]
-const effect: Array<TagProps['effect']> = ['light', 'dark', 'plain']
+const effect: Array<NonNullable<TagProps['effect']>> = [
+  'light',
+  'dark',
+  'plain',
+]
 
 const tagType = ref<TagProps['type']>('primary')
 const tagEffect = ref<TagProps['effect']>('plain')
@@ -35925,6 +35929,7 @@ const data = generateData(columns, 200)
 
 const rowClass = ({ rowIndex }) => {
   if (rowIndex < 0 || (rowIndex + 1) % 5 === 0) return 'sticky-row'
+  return ''
 }
 
 const stickyIndex = ref(0)
