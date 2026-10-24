@@ -1,1 +1,0 @@
-import{ai as n,an as e,T as s,D as c,Z as t,a3 as f,a1 as r}from"./framework.DlEdaxBH.js";const _={};function i(p,x){const o=e("el-button"),a=e("el-affix");return c(),s(a,{position:"bottom",offset:20},{default:t(()=>[f(o,{type:"primary"},{default:t(()=>[r("Offset bottom 20px")]),_:1})]),_:1})}const m=n(_,[["render",i]]);export{m as E};
