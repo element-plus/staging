@@ -1,0 +1,1 @@
+import{G as e,K as t,Tt as n,V as r,ft as i,gt as a,n as o}from"./framework.fqRerlkN.js";var s={};function c(o,s){let c=a(`el-button`),l=a(`el-affix`);return i(),r(l,{position:`bottom`,offset:20},{default:n(()=>[t(c,{type:`primary`},{default:n(()=>[e(`Offset bottom 20px`)]),_:1})]),_:1})}var l=o(s,[[`render`,c]]);export{l as t};
